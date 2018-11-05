@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="javaweb-mq-Kafka (1)" />
+        <module name="javaweb-mq-Kafka (2)" />
+        <module name="otn_tool" />
+        <module name="ptn_tool" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="javaweb-mq-Kafka (1)" target="1.8" />
+      <module name="javaweb-mq-Kafka (2)" target="1.8" />
+      <module name="otn_tool" target="1.8" />
+      <module name="ptn_tool" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
