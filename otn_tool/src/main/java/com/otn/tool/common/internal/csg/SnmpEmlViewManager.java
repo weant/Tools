@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.otn.tool.common.properties.Conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,7 +13,6 @@ import alu.nbi.opticscsg.OpticsIMSnmpEMLViewMib.SnmpEMLView;
 
 import com.otn.tool.common.internal.csg.util.SnmpException;
 import com.otn.tool.common.internal.util.ConfigKey;
-import com.alu.opd.utp.config.SimpleAppConfMgr;
 import com.alu.tools.basic.StringUtil;
 import com.alu.tools.basic.io.FileUtil;
 import com.alu.tools.basic.io.handler.ILineHandler;
@@ -39,7 +39,7 @@ public class SnmpEmlViewManager
 	public void init()
 	{
 		FileUtil.read(
-				new File(SimpleAppConfMgr.instance().getStrConf(ConfigKey.CSG_EMLVIEW_CONF_FILE)),
+				new File(Conf.instance().getProperty(ConfigKey.CSG_EMLVIEW_CONF_FILE)),
 				new ILineHandler()
 				{
 					private Pattern blank = Pattern.compile("\\s+");
@@ -105,12 +105,14 @@ public class SnmpEmlViewManager
 
 	private String getNameServiceURL(String host, int port)
 	{
+		String temp = Conf.instance().getPropertiesMap().containsKey(ConfigKey.NAME_SERVICE_KEY) ?
+				Conf.instance().getProperty(ConfigKey.NAME_SERVICE_KEY) :
+				ConfigKey.DEFAULT_NAME_SERVICE_KEY;
 		return "corbaloc::"
 				+ host
 				+ ":"
 				+ port
 				+ "/"
-				+ SimpleAppConfMgr.instance().getStrConf(ConfigKey.NAME_SERVICE_KEY,
-						ConfigKey.DEFAULT_NAME_SERVICE_KEY);
+				+ temp;
 	}
 }

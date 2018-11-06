@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import com.otn.tool.common.db.ToolsDbUtil;
 import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
-import com.alu.opd.utp.db.ToolsDBUtilities;
 
 /**
  * 进行多线程发送TL1命令操作
@@ -124,7 +124,7 @@ public class XosOperationBatchThread implements Callable<Void>{
 				tl1sch.get("response"),tl1sch.get("tl1constant")
 		};
 		try {
-			ToolsDBUtilities.instance().execute(sql, param);
+			ToolsDbUtil.instance().execute(sql, param);
 		} catch (Exception e) {
 			this.param.getLogs().add(getlogHead() + "insert oper exception:" + e.getMessage());
 		}
@@ -139,7 +139,7 @@ public class XosOperationBatchThread implements Callable<Void>{
 		};
 		
 		try {
-			ToolsDBUtilities.instance().execute(sql, param);
+			ToolsDbUtil.instance().execute(sql, param);
 		} catch (Exception e) {
 			this.param.getLogs().add(getlogHead() + "update oper exception:" + e.getMessage());
 		}
@@ -161,7 +161,7 @@ public class XosOperationBatchThread implements Callable<Void>{
 			" and equipaId='" + param.getAid() + "' and tl1Constant='" + param.getTl1Constants() + "'";
 		
 		try {
-			List<HashMap<Object, Object>> result = ToolsDBUtilities.instance().query(sql);
+			List<HashMap<Object, Object>> result = ToolsDbUtil.instance().query(sql);
 			if(result != null && result.size() > 0)
 				return result.get(0);
 		} catch (Exception e) {

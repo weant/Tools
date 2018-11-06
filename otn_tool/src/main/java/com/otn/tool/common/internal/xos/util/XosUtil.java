@@ -3,8 +3,8 @@ package com.otn.tool.common.internal.xos.util;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.otn.tool.common.internal.util.ConfigKey;
-import com.alu.opd.utp.config.SimpleAppConfMgr;
 import com.lucent.oms.xml.naInterface.Message_T;
+import com.otn.tool.common.properties.Conf;
 
 public class XosUtil
 {
@@ -39,17 +39,21 @@ public class XosUtil
 	public static void init()
 	{
 		reconnectInterval =
-				SimpleAppConfMgr.instance().getIntConf(ConfigKey.XOS_RECONNECT_INTERVAL,
-						ConfigKey.DEFAULT_XOS_RECONNECT_INTERVAL);
+				Conf.instance().getPropertiesMap().containsKey(ConfigKey.XOS_RECONNECT_INTERVAL) ?
+						Integer.valueOf(Conf.instance().getProperty(ConfigKey.XOS_RECONNECT_INTERVAL)) :
+						ConfigKey.DEFAULT_XOS_RECONNECT_INTERVAL;
 		requestTimeout =
-				SimpleAppConfMgr.instance().getIntConf(ConfigKey.XOS_REQUEST_TIMEOUT,
-						ConfigKey.DEFAULT_XOS_REQUEST_TIMEOUT);
+				Conf.instance().getPropertiesMap().containsKey(ConfigKey.XOS_REQUEST_TIMEOUT) ?
+						Integer.valueOf(Conf.instance().getProperty(ConfigKey.XOS_REQUEST_TIMEOUT)) :
+						ConfigKey.DEFAULT_XOS_REQUEST_TIMEOUT;
 		requestQueueSize =
-				SimpleAppConfMgr.instance().getIntConf(ConfigKey.XOS_REQUEST_QUEUE_SIZE,
-						ConfigKey.DEFAULT_XOS_REQUEST_QUEUE_SIZE);
+				Conf.instance().getPropertiesMap().containsKey(ConfigKey.XOS_REQUEST_QUEUE_SIZE) ?
+						Integer.valueOf(Conf.instance().getProperty(ConfigKey.XOS_REQUEST_QUEUE_SIZE)) :
+						ConfigKey.DEFAULT_XOS_REQUEST_QUEUE_SIZE;
 		parallelReqNum =
-				SimpleAppConfMgr.instance().getIntConf(ConfigKey.PARALLEL_XOS_REQUEST_NUM,
-						ConfigKey.DEFAULT_PARALLEL_XOS_REQUEST_NUM);
+				Conf.instance().getPropertiesMap().containsKey(ConfigKey.PARALLEL_XOS_REQUEST_NUM) ?
+						Integer.valueOf(Conf.instance().getProperty(ConfigKey.PARALLEL_XOS_REQUEST_NUM)) :
+						ConfigKey.DEFAULT_PARALLEL_XOS_REQUEST_NUM;
 	}
 
 	public static long reconnectInterval()

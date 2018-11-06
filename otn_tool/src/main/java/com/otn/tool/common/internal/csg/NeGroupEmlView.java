@@ -79,8 +79,9 @@ public class NeGroupEmlView
 	{
 		checker = new EmlViewChecker();
 		long heartbeatInterval =
-				Conf.instance().get(ConfigKey.EMLVIEW_HEART_BEAT_INTERVAL,
-						ConfigKey.DEFAULT_EMLVIEW_HEART_BEAT_INTERVAL);
+				Conf.instance().getPropertiesMap().containsKey(ConfigKey.EMLVIEW_HEART_BEAT_INTERVAL) ?
+				Long.valueOf(Conf.instance().getProperty(ConfigKey.EMLVIEW_HEART_BEAT_INTERVAL)) :
+						ConfigKey.DEFAULT_EMLVIEW_HEART_BEAT_INTERVAL;
 		timer.schedule(checker, heartbeatInterval, heartbeatInterval);
 	}
 
@@ -99,11 +100,10 @@ public class NeGroupEmlView
 
 	private static String getCsgEmlViewName(int groupID)
 	{
-		return SimpleAppConfMgr
-				.instance()
-				.getStrConf(ConfigKey.CSG_EMLVIEW_NAME_PATTERN,
-						ConfigKey.DEFAULT_CSG_EMLVIEW_NAME_PATTERN)
-				.replaceFirst("#", String.valueOf(groupID));
+		String temp = Conf.instance().getPropertiesMap().containsKey(ConfigKey.CSG_EMLVIEW_NAME_PATTERN) ?
+				Conf.instance().getProperty(ConfigKey.CSG_EMLVIEW_NAME_PATTERN) :
+				ConfigKey.DEFAULT_CSG_EMLVIEW_NAME_PATTERN;
+		return temp.replaceFirst("#", String.valueOf(groupID));
 	}
 
 	private class EmlViewChecker extends TimerTask

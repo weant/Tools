@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import com.otn.tool.common.properties.Conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.otn.tool.common.internal.util.ConfigKey;
 import com.otn.tool.common.internal.xos.util.XosUtil;
-import com.otn.tool.common.utp.config.SimpleAppConfMgr;
 import com.alu.tools.basic.NullUtil;
 import com.alu.tools.basic.io.FileUtil;
 import com.alu.tools.basic.io.handler.ILineHandler;
@@ -38,7 +38,7 @@ public class SessionManager
 
 	public void init()
 	{
-		FileUtil.read(new File(SimpleAppConfMgr.instance().getStrConf(ConfigKey.SNA_CONF_FILE)),
+		FileUtil.read(new File(Conf.instance().getProperty(ConfigKey.SNA_CONF_FILE)),
 				new ILineHandler()
 				{
 					private Pattern blank = Pattern.compile("\\s+");
