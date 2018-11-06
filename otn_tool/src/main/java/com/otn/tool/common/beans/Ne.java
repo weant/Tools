@@ -10,8 +10,8 @@ public class Ne implements Serializable {
     private String type;
     private String version;
     private String supervisionState;
-    private String emlId;
-    private String neGroup;
+    private int emlId;
+    private int groupId;
     private String nprId;
 
     public String getId() {
@@ -70,20 +70,18 @@ public class Ne implements Serializable {
         this.supervisionState = supervisionState;
     }
 
-    public String getEmlId() {
-        return emlId;
-    }
+    public int getEmlId() { return emlId; }
 
-    public void setEmlId(String emlId) {
+    public void setEmlId(int emlId) {
         this.emlId = emlId;
     }
 
-    public String getNeGroup() {
-        return neGroup;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setNeGroup(String neGroup) {
-        this.neGroup = neGroup;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getNprId() {

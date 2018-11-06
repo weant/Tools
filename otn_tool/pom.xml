@@ -121,6 +121,24 @@
       <scope>system</scope>
       <systemPath>${basedir}/libs/tikeswing-1.8.jar</systemPath>
     </dependency>
+    <dependency>
+      <groupId>com.lucent.oms</groupId>
+      <artifactId>naInterface</artifactId>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/naInterface.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>alu.nbi.opticscsg</groupId>
+      <artifactId>opticscsgIdl</artifactId>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/opticscsgIdl.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.alu.tools</groupId>
+      <artifactId>basicTools</artifactId>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/basicTools.jar</systemPath>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
     <dependency>
       <groupId>commons-logging</groupId>
