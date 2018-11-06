@@ -28,7 +28,6 @@
     <commons-io.version>1.3.2</commons-io.version>
     <commons-codec.version>1.11</commons-codec.version>
     <jacorb.version>3.9</jacorb.version>
-    <third.plugin.path>C:/Users/f5wang/.m2/repository</third.plugin.path>
     <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
     <jackson.version>2.6.4</jackson.version>
   </properties>
@@ -120,7 +119,7 @@
       <artifactId>tikeswing</artifactId>
       <version>1.8</version>
       <scope>system</scope>
-      <systemPath>${third.plugin.path}/org/tikeswing/tikeswing/1.8/tikeswing-1.8.jar</systemPath>
+      <systemPath>${basedir}/libs/tikeswing-1.8.jar</systemPath>
     </dependency>
     <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
     <dependency>
