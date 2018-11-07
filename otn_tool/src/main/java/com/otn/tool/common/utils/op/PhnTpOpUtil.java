@@ -121,7 +121,7 @@ public class PhnTpOpUtil implements Callable<List<OpticalPower>> {
 
     private GetCurrentPMPRequest constructRequest(Tp tp) {
         String ncName = "EML_" + String.valueOf(ne.getGroupId()) + "_SNA";
-        String neName = String.valueOf(ne.getGroupId());
+        String neName = String.valueOf(ne.getEmlId());
         String ptpName = handleTpName(tp.getName());
         String ftpName = "";
         String ctpName = "";

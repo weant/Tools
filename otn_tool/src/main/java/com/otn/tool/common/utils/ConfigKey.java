@@ -1,4 +1,4 @@
-package com.otn.tool.common.internal.util;
+package com.otn.tool.common.utils;
 
 public class ConfigKey
 {

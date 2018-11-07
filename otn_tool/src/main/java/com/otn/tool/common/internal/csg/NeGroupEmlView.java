@@ -13,7 +13,7 @@ import alu.nbi.opticscsg.OpticsIMSnmpEMLViewMib.SnmpEMLViewHelper;
 import com.otn.tool.common.internal.csg.util.CorbaException;
 import com.otn.tool.common.internal.csg.util.OrbInstance;
 import com.otn.tool.common.internal.csg.util.SnmpException;
-import com.otn.tool.common.internal.util.ConfigKey;
+import com.otn.tool.common.utils.ConfigKey;
 
 public class NeGroupEmlView
 {

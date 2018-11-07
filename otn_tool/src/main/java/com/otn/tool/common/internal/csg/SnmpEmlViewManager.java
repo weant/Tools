@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import alu.nbi.opticscsg.OpticsIMSnmpEMLViewMib.SnmpEMLView;
 
 import com.otn.tool.common.internal.csg.util.SnmpException;
-import com.otn.tool.common.internal.util.ConfigKey;
+import com.otn.tool.common.utils.ConfigKey;
 import com.alu.tools.basic.StringUtil;
 import com.alu.tools.basic.io.FileUtil;
 import com.alu.tools.basic.io.handler.ILineHandler;

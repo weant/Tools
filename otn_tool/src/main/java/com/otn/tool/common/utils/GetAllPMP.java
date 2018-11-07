@@ -1,4 +1,4 @@
-package com.otn.tool.common.internal;
+package com.otn.tool.common.utils;
 
 import java.util.LinkedList;
 import java.util.List;

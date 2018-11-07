@@ -11,7 +11,7 @@ import com.otn.tool.common.properties.Conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.otn.tool.common.internal.util.ConfigKey;
+import com.otn.tool.common.utils.ConfigKey;
 import com.otn.tool.common.internal.xos.util.XosUtil;
 import com.alu.tools.basic.NullUtil;
 import com.alu.tools.basic.io.FileUtil;

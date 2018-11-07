@@ -2,7 +2,7 @@ package com.otn.tool.common.internal.xos.request;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.otn.tool.common.internal.util.ConfigKey;
+import com.otn.tool.common.utils.ConfigKey;
 import com.otn.tool.common.internal.xos.request.types.TL1CutThroughRequest;
 import com.otn.tool.common.internal.xos.response.IResponseExtractor;
 import com.otn.tool.common.internal.xos.response.XosResponse;
