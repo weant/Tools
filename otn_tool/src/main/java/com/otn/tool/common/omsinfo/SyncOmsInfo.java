@@ -1,6 +1,9 @@
 package com.otn.tool.common.omsinfo;
 
+import bsh.commands.dir;
 import com.alu.tools.basic.io.FileUtil;
+import com.otn.tool.common.omsinfo.dynabean.EqualableDynaBeanClass;
+import com.otn.tool.common.restful.RestFulConstant;
 import com.otn.tool.common.utils.SshConnect;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaClass;
@@ -24,11 +27,34 @@ public class SyncOmsInfo {
     private static DynaClass instanceClazz=null;
     private static String usmHostName;
     private static String nmsVersion;
+    private static String usmIp;
+    private static String usmUser;
+    private static String usmPassword;
     private static String deafultInstanceNum;
+    private static String lineSeparator = System.getProperty("line.separator");
+
+    static {
+        DynaProperty[] props = new DynaProperty[]{
+                new DynaProperty("hostname", String.class),
+                new DynaProperty("dbPort", String.class),
+                new DynaProperty("dir", String.class),
+                new DynaProperty("ipAddress", String.class),
+                new DynaProperty("nsPort", String.class),
+                new DynaProperty("instanceNum", String.class),
+                new DynaProperty("version", String.class)
+        };
+
+        EqualableDynaBeanClass dClazz = new EqualableDynaBeanClass("InstanceData", props, new String[]{"hostname"});
+
+        instanceClazz = dClazz;
+    }
 
     public static boolean loadConf(String ip, String user, String password) throws Exception{
         String username = user == null ? USER : user;
         String ps  = password == null ? PASSWORD : password;
+        usmIp = ip;
+        usmUser = username;
+        usmPassword = ps;
         SshConnect sshSession = new SshConnect(ip, username, ps);
         sshSession.login();
 
@@ -58,7 +84,79 @@ public class SyncOmsInfo {
 
         sshSession.closeConn();
 
+        saveFile(instanceData);
+
         return true;
+    }
+
+
+    private static void saveFile(Collection<DynaBean> instanceData) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("USM_HOSTNAME=");
+        sb.append(usmHostName);
+        sb.append(lineSeparator);
+
+        sb.append("USM_IP=");
+        sb.append(usmIp);
+        sb.append(lineSeparator);
+
+        sb.append("USM_USER=");
+        sb.append(usmUser);
+        sb.append(lineSeparator);
+
+        sb.append("USM_PASSWORD=");
+        sb.append(usmPassword);
+        sb.append(lineSeparator);
+
+        sb.append("REST_PORT=");
+        sb.append(RestFulConstant.OTN_PORT);
+        sb.append(lineSeparator);
+
+        sb.append("REST_USER=");
+        sb.append(RestFulConstant.GUI_USERNAME);
+        sb.append(lineSeparator);
+
+        sb.append("REST_PASSWORD=");
+        sb.append(RestFulConstant.GUI_PASSWORD);
+        sb.append(lineSeparator);
+
+        for(DynaBean bean : instanceData) {
+            String server = bean.get("dir").toString();
+            sb.append(server +"_HOSTNAME=");
+            sb.append(bean.get("hostname").toString());
+            sb.append(lineSeparator);
+
+            sb.append(server +"_IP=");
+            sb.append(bean.get("ipAddress").toString());
+            sb.append(lineSeparator);
+
+            sb.append(server +"_DB_PORT=");
+            sb.append(bean.get("dbPort").toString());
+            sb.append(lineSeparator);
+
+            sb.append(server +"_DB_PASSWORD=");
+            sb.append("alu+123?");
+            sb.append(lineSeparator);
+
+            sb.append(server +"_NS_PORT=");
+            sb.append(bean.get("nsPort").toString());
+            sb.append(lineSeparator);
+
+            sb.append(server +"_VERSION=");
+            sb.append(bean.get("version").toString());
+            sb.append(lineSeparator);
+
+            sb.append(server +"_USER=");
+            sb.append("alcatel");
+            sb.append(lineSeparator);
+
+            sb.append(server +"_PASSWORD=");
+            sb.append("alcatel");
+            sb.append(lineSeparator);
+        }
+
+        String omsFile = "./conf/omsConf.properties";
+        generateFile(sb.toString(), omsFile);
     }
 
     /**
@@ -157,14 +255,12 @@ public class SyncOmsInfo {
      * @param filename
      */
     private static void generateFile(String content, String filename) {
-
         FileUtil.write(new File(filename), content, false);
     }
 
 
     @SuppressWarnings("unchecked")
-    private static Collection<DynaBean> getInstancesWithType(
-            Collection<DynaBean> instanceData) {
+    private static Collection<DynaBean> getInstancesWithType(Collection<DynaBean> instanceData) {
 
         String[] keys = new String[]{"EML"};
         Collection<DynaBean> output = Collections.emptyList();
@@ -386,7 +482,7 @@ public class SyncOmsInfo {
      */
     private static DynaBean parseInstance(String s) throws Exception {
         StringTokenizer tokenizer = new StringTokenizer(s,":");
-        DynaBean instanceData = new LazyDynaBean();
+        DynaBean instanceData = createInstanceData();
         String host = tokenizer.nextToken();
         instanceData.set("hostname", host);
 
@@ -469,6 +565,10 @@ public class SyncOmsInfo {
 
         }
         return matchStr;
+    }
+
+    private static DynaBean createInstanceData() throws Exception{
+        return instanceClazz.newInstance();
     }
 
     private static String getUSMName(SshConnect sshSession){

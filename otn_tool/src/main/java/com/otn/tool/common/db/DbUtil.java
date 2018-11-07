@@ -14,15 +14,10 @@ import java.util.*;
 
 public class DbUtil {
     private static Log log = LogFactory.getLog(DbUtil.class);
-    private DbManager dbm  = ToolsDbMgr.instance();
-//	private static DBUtil util = new DBUtil();
-//	private Object lock = new Object();
+    private DbManager dbm;
 
-    //	public static DBUtil instance(){
-//		return util;
-//	}
     public DbUtil(){
-
+        dbm  = ToolsDbMgr.instance();
     }
 
     //this method will be delete in the future

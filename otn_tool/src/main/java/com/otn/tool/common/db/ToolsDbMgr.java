@@ -24,9 +24,9 @@ public class ToolsDbMgr extends AbstractDbManager{
 
     public ToolsDbMgr(){
         Map<String,String> map = Conf.instance().getPropertiesMap();
-        this.userName = map.get("userName");
-        this.psw = map.get("password");
-        this.url = "jdbc:postgresql://" + map.get("host") + ":" + map.get("port") + "/" + map.get("dbaName")+"?characterEncoding=utf8";
+        this.userName = map.get("db.userName");
+        this.psw = map.get("db.password");
+        this.url = "jdbc:postgresql://" + map.get("db.host") + ":" + map.get("db.port") + "/" + map.get("db.dbaName")+"?characterEncoding=utf8";
     }
 
     public static ToolsDbMgr instance(){
