@@ -4,8 +4,9 @@
  * Date:     2018/11/6 23:19
  * Description: ToolsDbMgr
  */
-package com.otn.tool.common.db;
+package com.otn.tool.common.db.tool;
 
+import com.otn.tool.common.db.AbstractDbManager;
 import com.otn.tool.common.properties.Conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +16,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class ToolsDbMgr extends AbstractDbManager{
+public class ToolsDbMgr extends AbstractDbManager {
     private static Log log = LogFactory.getLog(ToolsDbMgr.class);
     private static ToolsDbMgr mgr = new ToolsDbMgr();
     private String url;

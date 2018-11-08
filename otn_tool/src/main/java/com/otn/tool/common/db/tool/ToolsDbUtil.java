@@ -4,7 +4,7 @@
  * Date:     2018/11/6 23:14
  * Description: DBUtil
  */
-package com.otn.tool.common.db;
+package com.otn.tool.common.db.tool;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

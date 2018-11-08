@@ -4,8 +4,10 @@
  * Date:     2018/11/6 23:17
  * Description: DbUtil
  */
-package com.otn.tool.common.db;
+package com.otn.tool.common.db.tool;
 
+import com.otn.tool.common.db.DbManager;
+import com.otn.tool.common.db.ProcedureParameter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

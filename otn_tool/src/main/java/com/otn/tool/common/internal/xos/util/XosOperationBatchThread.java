@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import com.otn.tool.common.db.ToolsDbUtil;
+import com.otn.tool.common.db.tool.ToolsDbUtil;
 import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
 

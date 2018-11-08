@@ -155,7 +155,7 @@ public class SyncOmsInfo {
             sb.append(lineSeparator);
         }
 
-        String omsFile = "./conf/omsConf.properties";
+        String omsFile = "D:/conf/omsConf.properties";
         generateFile(sb.toString(), omsFile);
     }
 
@@ -240,9 +240,9 @@ public class SyncOmsInfo {
         }
 
 
-        String csgFile = "./conf/csgConf.txt";
-        String snaFile = "./conf/snaConf.txt";
-        String gthFile ="./conf/gthConf.txt";
+        String csgFile = "D:/conf/csgConf.txt";
+        String snaFile = "D:/conf/snaConf.txt";
+        String gthFile ="D:/conf/gthConf.txt";
 
         generateFile(csgContent.toString(),csgFile);
         generateFile(snaContent.toString(),snaFile);
@@ -518,6 +518,11 @@ public class SyncOmsInfo {
                 }else{
                     String versionStr = matcher.group(2);
                     int versionInt = Integer.parseInt(versionStr);
+                    if(versionInt >= 14) {
+                        if(prefix.toUpperCase().indexOf("OTN") != -1) {
+                            prefix = "OTNE";
+                        }
+                    }
                     //prefix = NmsVersionUtil.getNameInRemoteHost(versionInt, null, prefix);
                     dir= (prefix + instanceNumStr).toUpperCase();
                 }
