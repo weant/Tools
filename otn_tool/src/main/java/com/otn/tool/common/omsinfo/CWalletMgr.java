@@ -1,4 +1,4 @@
-package com.otn.tool.common.omsinfo.dynabean;
+package com.otn.tool.common.omsinfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.otn.tool.common.properties.OmsConf;
 import com.otn.tool.common.utils.sftp.FtpFile;
 import com.otn.tool.common.utils.sftp.SFtpFileImpl;
 import com.sun.imageio.plugins.common.I18N;
@@ -23,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 public class CWalletMgr {
     private static Log log = LogFactory.getLog(CWalletMgr.class);
     
-    private final String localFolderPath = "OAMTool/wallet";
+    private final String localFolderPath = "/wallet";
     private final int port = 22;
     private static CWalletMgr cwMgr;
     
@@ -43,6 +44,8 @@ public class CWalletMgr {
     
     public String downloadWalletByNms(){
         NMSConfMgr nms = NMSConfMgr.instance();
+
+        Map<String, String> omsConfMap = OmsConf.instance().getPropertiesMap();
         
         ExecutorService exec = Executors.newFixedThreadPool(3);// 3个线程大小的线程池
         List<Future<Map<String, Boolean>>> futures = new ArrayList<Future<Map<String,Boolean>>>();
@@ -171,8 +174,7 @@ public class CWalletMgr {
         log.info("download " + dbName + " wallet finished! result: " + result);
         return result;
     }
-    
-    //[Feb 28, 2017][Huang Yang] - Start
+
     public boolean downloadWallet(String host, int port, String userName, String password, String dbName, int inst, int version, String hostName){
         log.info("begin to download " + dbName + " wallet!");
         String realDbName = NmsVersionUtil.getNameInRemoteHost(version, hostName, dbName).toLowerCase();
@@ -191,7 +193,6 @@ public class CWalletMgr {
         log.info("download " + dbName + " wallet finished! result: " + result);
         return result;
     }
-    //[Feb 28, 2017][Huang Yang] - End
     
     private String getLocalFolderPath(String dbName, int inst){
     	String systemPath = System.getenv("ALLUSERSPROFILE");

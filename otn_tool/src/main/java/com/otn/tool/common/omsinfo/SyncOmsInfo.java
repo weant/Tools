@@ -1,6 +1,5 @@
 package com.otn.tool.common.omsinfo;
 
-import bsh.commands.dir;
 import com.alu.tools.basic.io.FileUtil;
 import com.otn.tool.common.omsinfo.dynabean.EqualableDynaBeanClass;
 import com.otn.tool.common.restful.RestFulConstant;
@@ -8,7 +7,6 @@ import com.otn.tool.common.utils.SshConnect;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.commons.beanutils.DynaProperty;
-import org.apache.commons.beanutils.LazyDynaBean;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.logging.Log;
@@ -91,6 +89,10 @@ public class SyncOmsInfo {
 
 
     private static void saveFile(Collection<DynaBean> instanceData) {
+        StringBuilder emlInstances = new StringBuilder();
+        StringBuilder otnInstances = new StringBuilder();
+        String omsVersion = null;
+
         StringBuilder sb = new StringBuilder();
         sb.append("USM_HOSTNAME=");
         sb.append(usmHostName);
@@ -121,6 +123,21 @@ public class SyncOmsInfo {
         sb.append(lineSeparator);
 
         for(DynaBean bean : instanceData) {
+            if(bean.get("dir").toString().contains("EML") || bean.get("dir").toString().contains("OTNE")) {
+                emlInstances.append(bean.get("instanceNum").toString());
+                emlInstances.append(",");
+            }
+            if(bean.get("dir").toString().contains("OTN")) {
+                otnInstances.append(bean.get("instanceNum").toString());
+                otnInstances.append(",");
+            }
+
+            if(omsVersion == null) {
+                sb.append("OMS_VERSION=");
+                sb.append(bean.get("version").toString());
+                sb.append(lineSeparator);
+            }
+
             String server = bean.get("dir").toString();
             sb.append(server +"_HOSTNAME=");
             sb.append(bean.get("hostname").toString());
@@ -134,16 +151,8 @@ public class SyncOmsInfo {
             sb.append(bean.get("dbPort").toString());
             sb.append(lineSeparator);
 
-            sb.append(server +"_DB_PASSWORD=");
-            sb.append("alu+123?");
-            sb.append(lineSeparator);
-
             sb.append(server +"_NS_PORT=");
             sb.append(bean.get("nsPort").toString());
-            sb.append(lineSeparator);
-
-            sb.append(server +"_VERSION=");
-            sb.append(bean.get("version").toString());
             sb.append(lineSeparator);
 
             sb.append(server +"_USER=");
@@ -153,6 +162,17 @@ public class SyncOmsInfo {
             sb.append(server +"_PASSWORD=");
             sb.append("alcatel");
             sb.append(lineSeparator);
+        }
+
+        sb.append("EML_INSTANCE=");
+        if(emlInstances.length() > 0) {
+            sb.append(emlInstances.substring(0, emlInstances.lastIndexOf(",")-1));
+        }
+        sb.append(lineSeparator);
+
+        sb.append("OTN_INSTANCE=");
+        if(otnInstances.length() > 0) {
+            sb.append(otnInstances.substring(0, otnInstances.lastIndexOf(",")-1));
         }
 
         String omsFile = "D:/conf/omsConf.properties";

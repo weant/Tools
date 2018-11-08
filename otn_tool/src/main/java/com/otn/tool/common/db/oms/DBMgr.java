@@ -10,6 +10,7 @@ import java.util.Map;
 
 import java.util.Set;
 
+import com.otn.tool.common.properties.OmsConf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -36,62 +37,28 @@ public class DBMgr {
 	}
 	
 	private void init() {
-		Map<String, NMSConfEntry> nmsConfs = NMSConfMgr.instance().get_nmsConfEntries();
-		for (NMSConfEntry nmsConfEntry : nmsConfs.values()) {
-//			Set<Integer> pktInsts = nmsConfEntry._pktConfs.keySet();
-//			for (int pktInst : pktInsts) {
-//				Map<String, String> pktConfs = nmsConfEntry._pktConfs.get(pktInst);
-//				if (checkPKTDBConfIntegrity(pktConfs)) {
-//					conCreator.createPoolAndSave(pktConfs, DBEnum.PKT, pktInst, poolCache, nmsConfEntry._name);
-//
-//					conCreator.createPoolAndSave(pktConfs, DBEnum.PKT_SYS, pktInst, poolCache, nmsConfEntry._name+SYS);
-//				}
-//			}
-			
-			Set<Integer> sdhNPRInsts = nmsConfEntry._sdhNPRConfs.keySet();
-			for (int sdhNPRInst : sdhNPRInsts) {
-				Map<String, String> sdhNPRConfs = nmsConfEntry._sdhNPRConfs.get(sdhNPRInst);
-				if (checkSDHNPRDBConfIntegrity(sdhNPRConfs)) {
-					conCreator.createPoolAndSave(sdhNPRConfs, DBEnum.SDH, sdhNPRInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(sdhNPRConfs, DBEnum.WDM, sdhNPRInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(sdhNPRConfs, DBEnum.SDH_SYS, sdhNPRInst, poolCache, nmsConfEntry._name+SYS);
-				}
-			}
-			
-			Set<Integer> emlInsts = nmsConfEntry._emlConfs.keySet();
-			for (int emlInst : emlInsts) {
-				Map<String, String> emlConfs = nmsConfEntry._emlConfs.get(emlInst);
-				if (checkEMLDBConfIntegrity(emlConfs)) {
-					conCreator.createPoolAndSave(emlConfs, DBEnum.SNA, emlInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(emlConfs, DBEnum.ETH, emlInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(emlConfs, DBEnum.MPLS, emlInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(emlConfs, DBEnum.EML_ANALOG, emlInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(emlConfs, DBEnum.EML_SDH, emlInst, poolCache, nmsConfEntry._name);
-					conCreator.createPoolAndSave(emlConfs, DBEnum.EML_SYS, emlInst, poolCache, nmsConfEntry._name+SYS);
-				}
+		Map<String, String> omsConfMap = OmsConf.instance().getPropertiesMap();
+		String version = omsConfMap.get("OMS_VERSION");
+		if(omsConfMap.containsKey("EML_INSTANCE") && omsConfMap.get("EML_INSTANCE") != null && omsConfMap.get("EML_INSTANCE").length() > 0) {
+			String[] emlInstances = omsConfMap.get("EML_INSTANCE").split(",");
+			for(int i = 0; i < emlInstances.length; i++) {
+				conCreator.createPoolAndSave(version, DBEnum.SNA, Integer.parseInt(emlInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.ETH, Integer.parseInt(emlInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.MPLS, Integer.parseInt(emlInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.EML_ANALOG, Integer.parseInt(emlInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.EML_SDH, Integer.parseInt(emlInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.EML_SYS, Integer.parseInt(emlInstances[i]), poolCache, SYS);
 			}
 		}
-	}
-	
-	
-	private boolean checkSDHNPRDBConfIntegrity(Map<String, String> confItems) {
-		if (confItems.containsKey(ConnectionCreator.KEY_HOST) && confItems.get(ConnectionCreator.KEY_HOST).length() != 0 &&
-			confItems.containsKey(ConnectionCreator.KEY_IP) && confItems.get(ConnectionCreator.KEY_IP).length() != 0 &&
-			confItems.containsKey(ConnectionCreator.KEY_NMS_DIGITAL_VERSION) && confItems.get(ConnectionCreator.KEY_NMS_DIGITAL_VERSION).length() != 0 &&
-			confItems.containsKey(ConnectionCreator.KEY_DB_PORT) && confItems.get(ConnectionCreator.KEY_DB_PORT).length() != 0) {
-			return true;
+
+		if(omsConfMap.containsKey("OTN_INSTANCE") && omsConfMap.get("OTN_INSTANCE") != null && omsConfMap.get("OTN_INSTANCE").length() > 0) {
+			String[] otnInstances = omsConfMap.get("OTN_INSTANCE").split(",");
+			for(int i = 0; i < otnInstances.length; i++) {
+				conCreator.createPoolAndSave(version, DBEnum.SDH, Integer.parseInt(otnInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.WDM, Integer.parseInt(otnInstances[i]), poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.SDH_SYS, Integer.parseInt(otnInstances[i]), poolCache, SYS);
+			}
 		}
-		return false;
-	}
-	
-	private boolean checkEMLDBConfIntegrity(Map<String, String> confItems) {
-		if (confItems.containsKey(ConnectionCreator.KEY_HOST) && confItems.get(ConnectionCreator.KEY_HOST).length() != 0 &&
-				confItems.containsKey(ConnectionCreator.KEY_IP) && confItems.get(ConnectionCreator.KEY_IP).length() != 0 &&
-				confItems.containsKey(ConnectionCreator.KEY_NMS_DIGITAL_VERSION) && confItems.get(ConnectionCreator.KEY_NMS_DIGITAL_VERSION).length() != 0 &&
-				confItems.containsKey(ConnectionCreator.KEY_DB_PORT) && confItems.get(ConnectionCreator.KEY_DB_PORT).length() != 0) {
-				return true;
-		}
-		return false;
 	}
 	
 	public Connection getSDHNPRDBConnection(String nmsConfName, int instNum) {
@@ -100,17 +67,17 @@ public class DBMgr {
 	}
 	
 	public Connection getCurrentSDHNPRDBConnection() {
-		NMSConfEntry currentConf = NMSConfMgr.instance().get_currentConf();
-		if (currentConf != null){	
+		Map<String, String> omsConfMap = OmsConf.instance().getPropertiesMap();
+		if (!omsConfMap.isEmpty()){
 			int currentSDHNPRInst = -1;
-			Set<Integer> sdhNPRInsts = currentConf._sdhNPRConfs.keySet();
-			for (int sdhNPRInst : sdhNPRInsts) {
-				currentSDHNPRInst = sdhNPRInst;
+			String[] otnInstances = omsConfMap.get("OTN_INSTANCE").split(",");
+			for (String instance : otnInstances) {
+				currentSDHNPRInst = Integer.parseInt(instance);
 			}
 			if (currentSDHNPRInst == -1) {
 				return null;
 			} else {
-				return getSDHNPRDBConnection(currentConf._name, currentSDHNPRInst);
+				return getSDHNPRDBConnection("", currentSDHNPRInst);
 			}
 		} else {
 			return null;
@@ -135,18 +102,18 @@ public class DBMgr {
 	
 	public Connection getCurrentWDMDBConnection() {
 		log.debug("get wdm connection start");
-		NMSConfEntry currentConf = NMSConfMgr.instance().get_currentConf();
-		if (currentConf != null){
+		Map<String, String> omsConfMap = OmsConf.instance().getPropertiesMap();
+		if (!omsConfMap.isEmpty()){
 			log.debug(" otn conf not null");
-			int currentPKTInst = -1;
-			Set<Integer> pktInsts = currentConf._sdhNPRConfs.keySet();
-			for (int pktInst : pktInsts) {
-				currentPKTInst = pktInst;
+			int currentOTNInst = -1;
+			String[] otnInstances = omsConfMap.get("OTN_INSTANCE").split(",");
+			for (String instance : otnInstances) {
+				currentOTNInst = Integer.parseInt(instance);
 			}
-			if (currentPKTInst == -1) {
+			if (currentOTNInst == -1) {
 				return null;
 			} else {
-				return getWDMConnection(currentConf._name, currentPKTInst);
+				return getWDMConnection("", currentOTNInst);
 			}
 		} else {
 			log.debug(" otn conf is null, connection will return null");
@@ -194,8 +161,7 @@ public class DBMgr {
 					int pos1 = emlInst.indexOf('-');
 					String sInstNum = emlInst.substring(pos+1, pos1);
 					int instNum = Integer.parseInt(sInstNum);
-					String currentConfName = NMSConfMgr.instance().getCurrentConfName();
-					return getSNAConnection(currentConfName, instNum);
+					return getSNAConnection("", instNum);
 				}
 			} catch (SQLException e) {
 				return null;
@@ -225,17 +191,17 @@ public class DBMgr {
 	}
 	
 	public Connection getCurrentSDHNPRDBSysConnection() {
-		NMSConfEntry currentConf = NMSConfMgr.instance().get_currentConf();
-		if (currentConf != null){	
+		Map<String, String> omsConfMap = OmsConf.instance().getPropertiesMap();
+		if (!omsConfMap.isEmpty()){
 			int currentSDHNPRInst = -1;
-			Set<Integer> sdhNPRInsts = currentConf._sdhNPRConfs.keySet();
-			for (int sdhNPRInst : sdhNPRInsts) {
-				currentSDHNPRInst = sdhNPRInst;
+			String[] otnInstances = omsConfMap.get("OTN_INSTANCE").split(",");
+			for (String instance : otnInstances) {
+				currentSDHNPRInst = Integer.parseInt(instance);
 			}
 			if (currentSDHNPRInst == -1) {
 				return null;
 			} else {
-				return getSysConnection(DBEnum.SDH_SYS, currentConf._name+SYS, currentSDHNPRInst);
+				return getSysConnection(DBEnum.SDH_SYS, SYS, currentSDHNPRInst);
 			}
 		} else {
 			return null;
@@ -265,8 +231,7 @@ public class DBMgr {
 					int pos1 = emlInst.indexOf('-');
 					String sInstNum = emlInst.substring(pos+1, pos1);
 					int instNum = Integer.parseInt(sInstNum);
-					String currentConfName = NMSConfMgr.instance().getCurrentConfName();
-					return getSysConnection(DBEnum.EML_SYS, currentConfName+SYS, instNum);
+					return getSysConnection(DBEnum.EML_SYS, SYS, instNum);
 				}
 			} catch (SQLException e) {
 				return null;

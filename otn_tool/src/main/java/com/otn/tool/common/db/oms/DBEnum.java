@@ -1,6 +1,8 @@
 package com.otn.tool.common.db.oms;
 
 
+import java.io.File;
+
 public enum DBEnum {
 	
 //	PKT {
@@ -70,7 +72,12 @@ public enum DBEnum {
 
 		@Override
 		public String getWalletPath(int inst) {
-			return dirPath+"eml"+"_"+inst;
+			String dir = dirPath+"eml"+"_"+inst;
+			File file = new File(dir);
+			if(file.exists()) {
+				return dir;
+			}
+			return dirPath+"otn"+"_"+inst;
 		}
 	},
 	ETH {
@@ -81,7 +88,12 @@ public enum DBEnum {
 
 		@Override
 		public String getWalletPath(int inst) {
-			return dirPath+"eml"+"_"+inst;
+			String dir = dirPath+"eml"+"_"+inst;
+			File file = new File(dir);
+			if(file.exists()) {
+				return dir;
+			}
+			return dirPath+"otn"+"_"+inst;
 		}
 	},
 	EML_SYS{
@@ -92,7 +104,12 @@ public enum DBEnum {
 
 		@Override
 		public String getWalletPath(int inst) {
-			return dirPath+"eml"+"_"+inst;
+			String dir = dirPath+"eml"+"_"+inst;
+			File file = new File(dir);
+			if(file.exists()) {
+				return dir;
+			}
+			return dirPath+"otn"+"_"+inst;
 		}
 	},
 	MPLS {
@@ -103,7 +120,12 @@ public enum DBEnum {
 
 		@Override
 		public String getWalletPath(int inst) {
-			return dirPath+"eml"+"_"+inst;
+			String dir = dirPath+"eml"+"_"+inst;
+			File file = new File(dir);
+			if(file.exists()) {
+				return dir;
+			}
+			return dirPath+"otn"+"_"+inst;
 		}
 	},
 	
@@ -115,7 +137,12 @@ public enum DBEnum {
 
 		@Override
 		public String getWalletPath(int inst) {
-			return dirPath+"eml"+"_"+inst;
+			String dir = dirPath+"eml"+"_"+inst;
+			File file = new File(dir);
+			if(file.exists()) {
+				return dir;
+			}
+			return dirPath+"otn"+"_"+inst;
 		}
 	},
 	
@@ -127,17 +154,26 @@ public enum DBEnum {
 
 		@Override
 		public String getWalletPath(int inst) {
-			return dirPath+"eml"+"_"+inst;
+			String dir = dirPath+"eml"+"_"+inst;
+			File file = new File(dir);
+			if(file.exists()) {
+				return dir;
+			}
+			return dirPath+"otn"+"_"+inst;
 		}
 	}
 	
 	;
-	
-	protected static String dirPath  = System.getenv("ALLUSERSPROFILE")+"/OAMTool/wallet/";
+
+	protected static File currentDir = new File(".");
+	protected static String dirPath  = currentDir.getAbsolutePath() + "/wallet/";
 	
 	public abstract  String getAlias(String version,int inst);
 	public  String getCacheKey(String confName, int inst){
-		return confName+"_"+this+"_"+inst;
+		if(confName.length() > 0) {
+			return confName + "_" + this + "_" + inst;
+		}
+		return this+"_"+inst;
 	}
 	
 	public abstract String getWalletPath(int inst);
