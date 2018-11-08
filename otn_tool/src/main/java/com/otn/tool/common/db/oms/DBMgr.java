@@ -42,21 +42,23 @@ public class DBMgr {
 		if(omsConfMap.containsKey("EML_INSTANCE") && omsConfMap.get("EML_INSTANCE") != null && omsConfMap.get("EML_INSTANCE").length() > 0) {
 			String[] emlInstances = omsConfMap.get("EML_INSTANCE").split(",");
 			for(int i = 0; i < emlInstances.length; i++) {
-				conCreator.createPoolAndSave(version, DBEnum.SNA, Integer.parseInt(emlInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.ETH, Integer.parseInt(emlInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.MPLS, Integer.parseInt(emlInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.EML_ANALOG, Integer.parseInt(emlInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.EML_SDH, Integer.parseInt(emlInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.EML_SYS, Integer.parseInt(emlInstances[i]), poolCache, SYS);
+				int instance = Integer.parseInt(emlInstances[i]);
+				conCreator.createPoolAndSave(version, DBEnum.SNA, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.ETH, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.MPLS, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.EML_ANALOG, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.EML_SDH, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.EML_SYS, instance, poolCache, SYS);
 			}
 		}
 
 		if(omsConfMap.containsKey("OTN_INSTANCE") && omsConfMap.get("OTN_INSTANCE") != null && omsConfMap.get("OTN_INSTANCE").length() > 0) {
 			String[] otnInstances = omsConfMap.get("OTN_INSTANCE").split(",");
 			for(int i = 0; i < otnInstances.length; i++) {
-				conCreator.createPoolAndSave(version, DBEnum.SDH, Integer.parseInt(otnInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.WDM, Integer.parseInt(otnInstances[i]), poolCache, "");
-				conCreator.createPoolAndSave(version, DBEnum.SDH_SYS, Integer.parseInt(otnInstances[i]), poolCache, SYS);
+				int instance = Integer.parseInt(otnInstances[i]);
+				conCreator.createPoolAndSave(version, DBEnum.SDH, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.WDM, instance, poolCache, "");
+				conCreator.createPoolAndSave(version, DBEnum.SDH_SYS, instance, poolCache, SYS);
 			}
 		}
 	}
