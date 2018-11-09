@@ -1,4 +1,4 @@
-package com.otn.tool.common.utils.op;
+package com.otn.tool.common.obtainop;
 
 import com.otn.tool.common.beans.Ne;
 import com.otn.tool.common.beans.OpticalPower;

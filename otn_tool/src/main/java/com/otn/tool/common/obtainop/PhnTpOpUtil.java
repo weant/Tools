@@ -1,10 +1,11 @@
-package com.otn.tool.common.utils.op;
+package com.otn.tool.common.obtainop;
 
 import com.otn.tool.common.beans.Ne;
 import com.otn.tool.common.beans.OpticalPower;
 import com.otn.tool.common.beans.Tp;
 import com.otn.tool.common.internal.xos.request.GetCurrentPMPRequest;
 import com.otn.tool.common.internal.xos.response.extractors.GetOpPowerExtractor;
+import com.otn.tool.common.internal.xos.session.SessionManager;
 import com.otn.tool.common.internal.xos.util.XosException;
 import com.otn.tool.common.internal.xos.util.XosOperation;
 import com.otn.tool.common.utils.CollectionUtils;
@@ -150,5 +151,46 @@ public class PhnTpOpUtil implements Callable<List<OpticalPower>> {
             }
         }
         return tpName;
+    }
+
+    public static void main(String[] args) {
+        SessionManager.getInstance().init();
+        Ne ne = new Ne();
+        ne.setName("PSS1683");
+        ne.setCommunicationState("0");
+        ne.setEmlId(1);
+        ne.setGroupId(100);
+        ne.setId("7");
+        ne.setIpAddress("172.24.168.3");
+        ne.setType("1830PSS_32");
+
+
+        Tp tp = new Tp();
+        tp.setBoardName("AHPLG");
+        tp.setBoardType("OA");
+        tp.setId("75893");
+        tp.setNe(ne);
+        tp.setName("AHPLG-1-2-LINE");
+
+        Tp tp1 = new Tp();
+        tp1.setBoardName("AHPLG");
+        tp1.setBoardType("OA");
+        tp1.setId("76663");
+        tp1.setNe(ne);
+        tp1.setName("AHPLG-1-2-OSC");
+        List<Tp> tps = new ArrayList<>();
+
+        tps.add(tp);
+        tps.add(tp1);
+
+        PhnTpOpUtil op = new PhnTpOpUtil(ne, tps, false);
+        try {
+            List<OpticalPower> ops = op.call();
+
+            System.out.println("opr:" +ops.get(0).getOpr() + "\topt:" +ops.get(0).getOpt());
+            System.out.println("opr:" +ops.get(1).getOpr() + "\topt:" +ops.get(1).getOpt());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

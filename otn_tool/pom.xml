@@ -124,38 +124,65 @@
     <dependency>
       <groupId>com.lucent.oms</groupId>
       <artifactId>naInterface</artifactId>
+      <version>1.0</version>
       <scope>system</scope>
       <systemPath>${basedir}/libs/naInterface.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>alu.nbi.opticscsg</groupId>
       <artifactId>opticscsgIdl</artifactId>
+      <version>1.0</version>
       <scope>system</scope>
       <systemPath>${basedir}/libs/opticscsgIdl.jar</systemPath>
     </dependency>
     <dependency>
-      <groupId>com.alu.tools</groupId>
-      <artifactId>basicTools</artifactId>
-      <scope>system</scope>
-      <systemPath>${basedir}/libs/basicTools.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>com.alu.tools</groupId>
-      <artifactId>basicTools</artifactId>
-      <scope>system</scope>
-      <systemPath>${basedir}/libs/basicTools.jar</systemPath>
-    </dependency>
-    <dependency>
       <groupId>org.castor</groupId>
       <artifactId>castor</artifactId>
+      <version>1.3.1</version>
       <scope>system</scope>
       <systemPath>${basedir}/libs/castor-1.3.1.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.castor.core</groupId>
       <artifactId>castor-core</artifactId>
+      <version>1.3.1</version>
       <scope>system</scope>
       <systemPath>${basedir}/libs/castor-1.3.1-core.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>oracle</groupId>
+      <artifactId>ojdbc</artifactId>
+      <version>6</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/ojdbc6.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>oracle.security.pki</groupId>
+      <artifactId>oraclepki</artifactId>
+      <version>6</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/oraclepki.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>oracle.security.crypto</groupId>
+      <artifactId>osdt_core</artifactId>
+      <version>6</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/osdt_core.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>oracle.security.crypto.cert</groupId>
+      <artifactId>osdt_cert</artifactId>
+      <version>6</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/osdt_cert.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.nsb.oamtools</groupId>
+      <artifactId>basicTools</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/basicTools.jar</systemPath>
     </dependency>
     <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
     <dependency>

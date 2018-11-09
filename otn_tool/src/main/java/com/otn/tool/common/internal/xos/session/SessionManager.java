@@ -19,9 +19,9 @@ import com.alu.tools.basic.io.handler.ILineHandler;
 
 public class SessionManager
 {
-	private Map<Integer, SnaAddress> groupIDToSnaAddr = new HashMap<Integer, SnaAddress>();
+	private Map<Integer, SnaAddress> groupIDToSnaAddr = new HashMap<>();
 
-	private Map<Integer, IXosSession> groupIDToSession = new HashMap<Integer, IXosSession>();
+	private Map<Integer, IXosSession> groupIDToSession = new HashMap<>();
 
 	private static SessionManager instance = new SessionManager();
 

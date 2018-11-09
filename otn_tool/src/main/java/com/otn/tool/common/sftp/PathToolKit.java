@@ -1,4 +1,4 @@
-package com.otn.tool.common.utils.sftp;
+package com.otn.tool.common.sftp;
 
 import java.io.File;
 

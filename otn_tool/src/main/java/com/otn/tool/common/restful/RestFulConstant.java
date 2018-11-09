@@ -2,12 +2,6 @@ package com.otn.tool.common.restful;
 
 public class RestFulConstant {
 
-	// public static final int OTNPORT = 8443;
-
-	// public static final String CASURL = "/cas/v1/tickets";
-
-	// public static final String OMSURL = "/oms1350/data/plat/session/login";
-
 	public static final String OTN_IP = "135.251.96.33";
 
 	public static final int OTN_PORT = 8443;

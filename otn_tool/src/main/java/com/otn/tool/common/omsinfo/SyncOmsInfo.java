@@ -12,7 +12,7 @@ import org.apache.commons.collections.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,12 +24,13 @@ public class SyncOmsInfo {
     private static final String PASSWORD="Install10";
     private static DynaClass instanceClazz=null;
     private static String usmHostName;
-    private static String nmsVersion;
+    private static String omsVersion;
     private static String usmIp;
     private static String usmUser;
     private static String usmPassword;
     private static String deafultInstanceNum;
     private static String lineSeparator = System.getProperty("line.separator");
+    private static Set<IpAndHost> ipAndHostSet;
 
     static {
         DynaProperty[] props = new DynaProperty[]{
@@ -50,6 +51,7 @@ public class SyncOmsInfo {
     public static boolean loadConf(String ip, String user, String password) throws Exception{
         String username = user == null ? USER : user;
         String ps  = password == null ? PASSWORD : password;
+        ipAndHostSet = new HashSet<>();
         usmIp = ip;
         usmUser = username;
         usmPassword = ps;
@@ -84,6 +86,8 @@ public class SyncOmsInfo {
 
         saveFile(instanceData);
 
+        HostsUtils.getInstance().updateHostFile(ipAndHostSet);
+
         return true;
     }
 
@@ -91,7 +95,8 @@ public class SyncOmsInfo {
     private static void saveFile(Collection<DynaBean> instanceData) {
         StringBuilder emlInstances = new StringBuilder();
         StringBuilder otnInstances = new StringBuilder();
-        String omsVersion = null;
+
+        ipAndHostSet.add(new IpAndHost(usmIp, usmHostName));
 
         StringBuilder sb = new StringBuilder();
         sb.append("USM_HOSTNAME=");
@@ -122,6 +127,10 @@ public class SyncOmsInfo {
         sb.append(RestFulConstant.GUI_PASSWORD);
         sb.append(lineSeparator);
 
+        sb.append("OMS_VERSION=");
+        sb.append(omsVersion);
+        sb.append(lineSeparator);
+
         for(DynaBean bean : instanceData) {
             if(bean.get("dir").toString().contains("EML") || bean.get("dir").toString().contains("OTNE")) {
                 emlInstances.append(bean.get("instanceNum").toString());
@@ -132,11 +141,7 @@ public class SyncOmsInfo {
                 otnInstances.append(",");
             }
 
-            if(omsVersion == null) {
-                sb.append("OMS_VERSION=");
-                sb.append(bean.get("version").toString());
-                sb.append(lineSeparator);
-            }
+            ipAndHostSet.add(new IpAndHost(bean.get("ipAddress").toString(), bean.get("hostname").toString()));
 
             String server = bean.get("dir").toString();
             sb.append(server +"_HOSTNAME=");
@@ -166,16 +171,16 @@ public class SyncOmsInfo {
 
         sb.append("EML_INSTANCE=");
         if(emlInstances.length() > 0) {
-            sb.append(emlInstances.substring(0, emlInstances.lastIndexOf(",")-1));
+            sb.append(emlInstances.substring(0, emlInstances.lastIndexOf(",")));
         }
         sb.append(lineSeparator);
 
         sb.append("OTN_INSTANCE=");
         if(otnInstances.length() > 0) {
-            sb.append(otnInstances.substring(0, otnInstances.lastIndexOf(",")-1));
+            sb.append(otnInstances.substring(0, otnInstances.lastIndexOf(",")));
         }
 
-        String omsFile = "D:/conf/omsConf.properties";
+        String omsFile = "/conf/omsConf.properties";
         generateFile(sb.toString(), omsFile);
     }
 
@@ -260,9 +265,9 @@ public class SyncOmsInfo {
         }
 
 
-        String csgFile = "D:/conf/csgConf.txt";
-        String snaFile = "D:/conf/snaConf.txt";
-        String gthFile ="D:/conf/gthConf.txt";
+        String csgFile = "/conf/csgConf.txt";
+        String snaFile = "/conf/snaConf.txt";
+        String gthFile ="/conf/gthConf.txt";
 
         generateFile(csgContent.toString(),csgFile);
         generateFile(snaContent.toString(),snaFile);
@@ -275,7 +280,9 @@ public class SyncOmsInfo {
      * @param filename
      */
     private static void generateFile(String content, String filename) {
-        FileUtil.write(new File(filename), content, false);
+        File currentDir = new File(".");
+        String folderPath = currentDir.getAbsolutePath() + filename;
+        FileUtil.write(new File(folderPath), content, false);
     }
 
 
@@ -454,7 +461,7 @@ public class SyncOmsInfo {
         String[] result = sshSession.execShell(command);
         String[] splitArray = result[0].trim().split("_");
         deafultInstanceNum = splitArray[1];
-        nmsVersion = splitArray[2];
+        omsVersion = splitArray[2];
     }
 
 
@@ -521,7 +528,7 @@ public class SyncOmsInfo {
      * @return
      */
     private static void initDirAndInstanceNO(String sid, DynaBean instance) {
-        if(Integer.valueOf(nmsVersion) >= 18) {
+        if(Integer.valueOf(omsVersion) >= 18) {
             instance.set("instanceNum", deafultInstanceNum);
             instance.set("dir", String.join("_", sid,deafultInstanceNum));
         } else {
@@ -606,7 +613,6 @@ public class SyncOmsInfo {
         }
         return "";
     }
-
 
     public static void main(String[] args){
         try {

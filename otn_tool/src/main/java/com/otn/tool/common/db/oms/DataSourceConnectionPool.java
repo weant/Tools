@@ -18,7 +18,7 @@ public class DataSourceConnectionPool implements ConnectionPool {
 	private static final String DRIVER="oracle.jdbc.OracleDriver";
 	private static final String BASE_URL="jdbc:oracle:thin:@";
 	private static final String TEST_SQL="select 1 from dual";
-	private static final int MAX=10;
+	private static final int MAX=6;
 	private static final int MIN=2;
 	private static final String TNS_KEY = "oracle.net.tns_admin";
 	private static final String WALLET_KEY = "oracle.net.wallet_location";

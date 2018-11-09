@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.Set;
-
 import com.otn.tool.common.properties.OmsConf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -317,5 +315,8 @@ public class DBMgr {
 		log.error("can not find emlInst for neIp:" + neIp);
 		return -1;
 	}
-	
+
+	public static void main(String[] args) {
+		Connection eml = DBMgr.instance().getCurrentEmlSysConnection("100");
+	}
 }

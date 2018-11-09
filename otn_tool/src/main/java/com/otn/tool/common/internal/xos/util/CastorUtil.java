@@ -62,9 +62,7 @@ public class CastorUtil
 			if (rootName != null) marshaller.setRootElement(rootName);
 			marshaller.setMarshalAsDocument(marshalAsDocument);
 			marshaller.marshal(obj);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new BasicRuntimeException("Failed to marshal object", e);
 		}
 	}
