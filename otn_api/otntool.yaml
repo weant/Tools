@@ -1,0 +1,119 @@
+swagger: '2.0'
+info:
+  title: OTN Tool RESTful APIs
+  version: '1.0'
+  description: OTN Tool RESTful APIs
+produces:
+  - application/json;charset=utf-8
+schemes:
+  - http
+  - https
+
+basePath: /
+paths:
+  /op/tp:
+    post:
+      tags:
+        - OP
+      operationId: batchObtainTpOp
+      parameters:
+        - name: parameter
+          description: '批量获取端口光功率，可传入多个网元的多个端口'
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NeTps'
+      responses:
+        200:
+          description: Succeed
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TpOp'
+        500:
+          description: Failure
+          schema:
+            $ref: '#/definitions/FailureInfo'
+  
+  /op/connection:
+    post:
+      tags:
+        - OP
+      operationId: batchGetConnectionOp
+      parameters:
+        - name: connIds
+          description: '批量获取连接终端的光功率，即使端口没有光功率也会返回'
+          required: true
+          in: body
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        200:
+          description: Succeed
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ConnectionOp'
+        500:
+          description: Failure
+          schema:
+            $ref: '#/definitions/FailureInfo'
+
+
+########################################################
+# DEFINITIONS
+# ------------------------------------------------------
+definitions:
+  ErrorCode:
+    type: string
+    enum:
+      - NAME_EXISTED
+      - ENTITY_NOT_EXISTED
+
+  FailureInfo:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/ErrorCode'
+
+  SuccessInfo:
+    type: object
+    properties:
+      status:
+        type: boolean
+  
+  NeTps:
+    type: object
+    properties:
+      neId:
+        type: string
+      tpIds:
+        type: array
+        items:
+          type: string
+  
+  TpOp:
+    type: object
+    properties:
+      neId:
+        type: string
+      tpId:
+        type: string
+      opr:
+        type: string
+      oprt:
+        type: string
+  
+  ConnectionOp:
+    type: object
+    properties:
+      connectionId:
+        type: string
+      tpOps:
+        type: array
+        items:
+          $ref: '#/definitions/TpOp'
