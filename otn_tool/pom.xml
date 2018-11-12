@@ -30,6 +30,7 @@
     <slf4j.version>1.7.25</slf4j.version>
     <log4j.version>2.11.0</log4j.version>
     <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+    <api.version>1.0</api.version>
   </properties>
 
   <dependencies>
@@ -213,6 +214,11 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>${javax.servlet.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.otn.tool</groupId>
+      <artifactId>otn-restful-api-server</artifactId>
+      <version>${api.version}</version>
     </dependency>
   </dependencies>
 

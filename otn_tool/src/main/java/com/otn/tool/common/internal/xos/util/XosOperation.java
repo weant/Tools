@@ -1,5 +1,6 @@
 package com.otn.tool.common.internal.xos.util;
 
+import com.otn.tool.common.internal.xos.request.XosRequest;
 import com.otn.tool.common.internal.xos.request.types.TL1CutThroughRequest;
 import com.otn.tool.common.internal.xos.response.IResponseExtractor;
 import com.otn.tool.common.internal.xos.response.XosResponse;
@@ -9,7 +10,6 @@ import com.otn.tool.common.internal.xos.session.IXosSession;
 import com.otn.tool.common.internal.xos.session.SessionManager;
 import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
-import com.otn.tool.common.internal.xos.request.XosRequest;
 
 public class XosOperation
 {

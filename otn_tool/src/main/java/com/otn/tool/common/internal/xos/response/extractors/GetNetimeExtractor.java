@@ -2,16 +2,16 @@ package com.otn.tool.common.internal.xos.response.extractors;
 
 //import java.text.DateFormat;
 //import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.otn.tool.common.internal.xos.response.IResponseExtractor;
-import com.otn.tool.common.internal.xos.response.IllegalResponseException;
 import com.alu.tools.basic.collection.Container;
 import com.lucent.oms.xml.naInterface.Message_T;
 import com.lucent.oms.xml.naInterface.NEmgrExt_I_GetNEtimeresp_T;
+import com.otn.tool.common.internal.xos.response.IResponseExtractor;
+import com.otn.tool.common.internal.xos.response.IllegalResponseException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.Date;
 
 public class GetNetimeExtractor implements IResponseExtractor<Date> {
 	private static Log LOG = LogFactory.getLog(GetNetimeExtractor.class);

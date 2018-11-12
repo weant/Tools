@@ -1,16 +1,12 @@
 package com.otn.tool.common.internal.xos.request;
 
-import com.otn.tool.common.internal.xos.response.IResponseExtractor;
-import com.otn.tool.common.internal.xos.response.IXosResponseHandler;
-import com.otn.tool.common.internal.xos.response.IllegalResponseException;
-import com.otn.tool.common.internal.xos.response.TL1ResponseFailureException;
-import com.otn.tool.common.internal.xos.response.XosResponse;
-import com.otn.tool.common.internal.xos.util.XosUtil;
 import com.alu.tools.basic.ArgumentUtil;
 import com.alu.tools.basic.NullUtil;
 import com.alu.tools.basic.collection.Container;
 import com.lucent.oms.xml.naInterface.Message_T;
 import com.lucent.oms.xml.naInterface.types.ResponseStatus_T;
+import com.otn.tool.common.internal.xos.response.*;
+import com.otn.tool.common.internal.xos.util.XosUtil;
 
 public class PendingXosRequest<T>
 {

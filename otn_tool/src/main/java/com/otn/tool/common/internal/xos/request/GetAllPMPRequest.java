@@ -1,12 +1,11 @@
 package com.otn.tool.common.internal.xos.request;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.lucent.oms.xml.naInterface.DsCommon_TPname_T;
 import com.lucent.oms.xml.naInterface.DsPerfMgnt_AllPMTPreq_T;
 import com.lucent.oms.xml.naInterface.LayerDefs_LayerRateList_T;
 import com.lucent.oms.xml.naInterface.PerfMgr_I_GetAllPMTPrqst_T;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class GetAllPMPRequest extends MultiXosRequest {
 

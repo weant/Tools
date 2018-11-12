@@ -1,13 +1,13 @@
 package com.otn.tool.common.db.oms;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.LinkedList;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class ConnectionPoolImpl implements ConnectionPool {
 	Log log = LogFactory.getLog(ConnectionPoolImpl.class);

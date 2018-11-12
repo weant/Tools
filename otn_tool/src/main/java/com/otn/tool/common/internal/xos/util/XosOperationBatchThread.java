@@ -1,16 +1,12 @@
 package com.otn.tool.common.internal.xos.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-
 import com.otn.tool.common.db.tool.ToolsDbUtil;
 import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.Callable;
 
 /**
  * 进行多线程发送TL1命令操作

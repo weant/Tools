@@ -1,16 +1,16 @@
 package com.otn.tool.common.db.oms;
 
 
+import com.otn.tool.common.properties.OmsConf;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.otn.tool.common.properties.OmsConf;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class DBMgr {
 	private static Log log = LogFactory.getLog(DBMgr.class);

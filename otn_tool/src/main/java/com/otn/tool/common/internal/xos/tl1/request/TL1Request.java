@@ -1,14 +1,14 @@
 package com.otn.tool.common.internal.xos.tl1.request;
 
+import com.alu.tools.basic.ArgumentUtil;
+import com.alu.tools.basic.NullUtil;
+import com.otn.tool.common.internal.xos.tl1.response.StateParam;
+import com.otn.tool.common.internal.xos.tl1.util.TL1Format;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import com.otn.tool.common.internal.xos.tl1.response.StateParam;
-import com.otn.tool.common.internal.xos.tl1.util.TL1Format;
-import com.alu.tools.basic.ArgumentUtil;
-import com.alu.tools.basic.NullUtil;
 
 public class TL1Request
 {

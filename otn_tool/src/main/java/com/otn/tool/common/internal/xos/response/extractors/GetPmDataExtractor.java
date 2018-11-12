@@ -1,15 +1,15 @@
 package com.otn.tool.common.internal.xos.response.extractors;
-import java.util.LinkedList;
-import java.util.List;
 
 import com.alu.tools.basic.StringUtil;
 import com.lucent.oms.xml.naInterface.DsPMdata_PMDataList_T;
 import com.lucent.oms.xml.naInterface.DsPMdata_PMData_T;
 import com.lucent.oms.xml.naInterface.DsPMdata_PMMeasurement_T;
 import com.lucent.oms.xml.naInterface.Message_T;
-
 import com.otn.tool.common.internal.xos.request.GetPmDataRequest;
 import com.otn.tool.common.internal.xos.request.PmpCurrentData;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class GetPmDataExtractor extends
 		AbstractListDataExtractor<PmpCurrentData, DsPMdata_PMDataList_T> {

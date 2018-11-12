@@ -1,21 +1,19 @@
 package com.otn.tool.common.internal.csg;
 
+import alu.nbi.opticscsg.OpticsIMSnmpEMLViewMib.SnmpEMLView;
+import com.alu.tools.basic.StringUtil;
+import com.alu.tools.basic.io.FileUtil;
+import com.alu.tools.basic.io.handler.ILineHandler;
+import com.otn.tool.common.internal.csg.util.SnmpException;
+import com.otn.tool.common.properties.Conf;
+import com.otn.tool.common.utils.ConfigKey;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import com.otn.tool.common.properties.Conf;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import alu.nbi.opticscsg.OpticsIMSnmpEMLViewMib.SnmpEMLView;
-
-import com.otn.tool.common.internal.csg.util.SnmpException;
-import com.otn.tool.common.utils.ConfigKey;
-import com.alu.tools.basic.StringUtil;
-import com.alu.tools.basic.io.FileUtil;
-import com.alu.tools.basic.io.handler.ILineHandler;
 
 public class SnmpEmlViewManager
 {

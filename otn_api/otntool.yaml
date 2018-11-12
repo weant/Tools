@@ -105,7 +105,7 @@ definitions:
         type: string
       opr:
         type: string
-      oprt:
+      opt:
         type: string
   
   ConnectionOp:

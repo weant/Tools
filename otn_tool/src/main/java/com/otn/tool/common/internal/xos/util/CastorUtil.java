@@ -1,13 +1,12 @@
 package com.otn.tool.common.internal.xos.util;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
-
+import com.alu.tools.basic.exception.BasicRuntimeException;
 import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
 
-import com.alu.tools.basic.exception.BasicRuntimeException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 public class CastorUtil
 {

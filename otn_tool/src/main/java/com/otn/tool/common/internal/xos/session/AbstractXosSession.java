@@ -1,22 +1,21 @@
 package com.otn.tool.common.internal.xos.session;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.util.Scanner;
-import java.util.regex.Pattern;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.otn.tool.common.internal.xos.util.CastorUtil;
 import com.alu.tools.basic.ArgumentUtil;
 import com.alu.tools.basic.NullUtil;
 import com.alu.tools.basic.exception.BasicRuntimeException;
 import com.alu.tools.basic.io.IoUtil;
 import com.lucent.oms.xml.naInterface.Message_T;
 import com.lucent.oms.xml.naInterface.types.OpRole_T;
+import com.otn.tool.common.internal.xos.util.CastorUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public abstract class AbstractXosSession implements IXosSession
 {

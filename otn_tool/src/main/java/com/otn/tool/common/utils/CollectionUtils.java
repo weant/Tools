@@ -1,6 +1,6 @@
 package com.otn.tool.common.utils;
 
-import java.util.*;
+import java.util.Collection;
 
 public abstract class CollectionUtils {
 

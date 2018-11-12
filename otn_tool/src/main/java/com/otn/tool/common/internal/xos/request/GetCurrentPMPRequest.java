@@ -1,12 +1,6 @@
 package com.otn.tool.common.internal.xos.request;
 
-import com.lucent.oms.xml.naInterface.DsCommon_NEname_T;
-import com.lucent.oms.xml.naInterface.DsCommon_TPname_T;
-import com.lucent.oms.xml.naInterface.DsNEmgnt_NEParametersInfo_T;
-import com.lucent.oms.xml.naInterface.GlobalDefs_NVSList_T;
-import com.lucent.oms.xml.naInterface.GlobalDefs_NameAndValueString_T;
-import com.lucent.oms.xml.naInterface.NEmgr_I_GetNEParametersrqst_T;
-import com.lucent.oms.xml.naInterface.TPmgr_I_GetTPWithAdditionalInforqst_T;
+import com.lucent.oms.xml.naInterface.*;
 
 public class GetCurrentPMPRequest extends SingleXosRequest {
 

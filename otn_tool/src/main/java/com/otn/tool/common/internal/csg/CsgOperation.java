@@ -1,32 +1,20 @@
 package com.otn.tool.common.internal.csg;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.omg.CORBA.Any;
-import com.otn.tool.common.internal.csg.util.CsgUtil;
-import com.otn.tool.common.internal.csg.util.OrbInstance;
-import com.otn.tool.common.internal.csg.util.SnmpException;
 import alu.nbi.opticscsg.NetworkAdministration.ActionInfos;
 import alu.nbi.opticscsg.NetworkAdministration.ActionInfosHolder;
 import alu.nbi.opticscsg.NetworkAdministrationReply.NetworkAdminReplyPOATie;
 import alu.nbi.opticscsg.NetworkDefs.ActionStatus;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetColumnFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetContRectanglesByRowFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetContRectanglesFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetMultiColumnByRowFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetMultiColumnFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetMultiObjFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetNextFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetRectanglesByRowFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetRectanglesFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.GetTableFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.SetFailed;
-import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.SetMultiObjFailed;
+import alu.nbi.opticscsg.OpticsIMCsg.CsgGroupPackage.*;
 import alu.nbi.opticscsg.OpticsIMCsgVar.CsgVarPackage.AttrListHolder;
 import alu.nbi.opticscsg.OpticsIMCsgVar.CsgVarPackage.AttrVal;
 import alu.nbi.opticscsg.OpticsIMCsgVar.CsgVarPackage.AttrValHolder;
 import alu.nbi.opticscsg.OpticsIMSnmpEMLViewMib.SnmpEMLView;
+import com.otn.tool.common.internal.csg.util.CsgUtil;
+import com.otn.tool.common.internal.csg.util.OrbInstance;
+import com.otn.tool.common.internal.csg.util.SnmpException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.omg.CORBA.Any;
 
 public class CsgOperation
 {

@@ -1,15 +1,14 @@
 
 package com.otn.tool.common.internal.xos.response.extractors;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alu.tools.basic.collection.CollectionUtil;
 import com.alu.tools.basic.collection.Container;
 import com.lucent.oms.xml.naInterface.Message_T;
-
 import com.otn.tool.common.internal.xos.response.IResponseExtractor;
-import  com.otn.tool.common.internal.xos.response.IllegalResponseException;
+import com.otn.tool.common.internal.xos.response.IllegalResponseException;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class AbstractListDataExtractor<T, L> implements
         IResponseExtractor<List<T>>

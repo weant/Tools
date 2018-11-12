@@ -1,9 +1,8 @@
 package com.otn.tool.common.internal.xos.response;
 
-import com.otn.tool.common.internal.xos.util.XosException;
 import com.lucent.oms.xml.naInterface.Message_T;
-
 import com.otn.tool.common.internal.xos.util.CastorUtil;
+import com.otn.tool.common.internal.xos.util.XosException;
 
 public class IllegalResponseException extends XosException
 {

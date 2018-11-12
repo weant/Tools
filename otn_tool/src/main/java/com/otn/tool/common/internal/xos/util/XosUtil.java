@@ -1,10 +1,10 @@
 package com.otn.tool.common.internal.xos.util;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.otn.tool.common.utils.ConfigKey;
 import com.lucent.oms.xml.naInterface.Message_T;
 import com.otn.tool.common.properties.Conf;
+import com.otn.tool.common.utils.ConfigKey;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 public class XosUtil
 {

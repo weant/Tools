@@ -1,16 +1,6 @@
 package com.otn.tool.common.internal.xos.request;
 
-import com.lucent.oms.xml.naInterface.DsCommon_TPname_T;
-import com.lucent.oms.xml.naInterface.DsPMdata_GranularityList_T;
-import com.lucent.oms.xml.naInterface.DsPMdata_PMDirectionList_T;
-import com.lucent.oms.xml.naInterface.DsPMdata_PMLocationList_T;
-import com.lucent.oms.xml.naInterface.DsPMdata_PMParameterNameList_T;
-import com.lucent.oms.xml.naInterface.DsPMdata_PMTPSelectList_T;
-import com.lucent.oms.xml.naInterface.DsPMdata_PMTPselect_T;
-import com.lucent.oms.xml.naInterface.DsPerfMgnt_GetAllCurrentPMdataReq_T;
-import com.lucent.oms.xml.naInterface.GlobalDefs_NVSList_T;
-import com.lucent.oms.xml.naInterface.LayerDefs_LayerRateList_T;
-import com.lucent.oms.xml.naInterface.PerfMgr_I_GetAllCurrentPMData_Sirqst_T;
+import com.lucent.oms.xml.naInterface.*;
 
 public class GetPmDataRequest extends MultiXosRequest {
 

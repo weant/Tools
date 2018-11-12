@@ -1,5 +1,6 @@
 package com.otn.tool.common.internal.csg.util;
 
+import com.otn.tool.common.utils.ORBWrapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.omg.CORBA.Any;
@@ -7,8 +8,6 @@ import org.omg.CORBA.UserException;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
-
-import com.otn.tool.common.utils.ORBWrapper;
 
 public class OrbInstance
 {

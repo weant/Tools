@@ -1,14 +1,13 @@
 package com.otn.tool.common.internal.xos.response.extractors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.otn.tool.common.internal.xos.request.types.GetTPRequest;
-import com.otn.tool.common.internal.xos.response.IResponseExtractor;
-import com.otn.tool.common.internal.xos.response.IllegalResponseException;
 import com.alu.tools.basic.collection.Container;
 import com.lucent.oms.xml.naInterface.Message_T;
 import com.lucent.oms.xml.naInterface.TPmgr_I_GetTPresp_T;
+import com.otn.tool.common.internal.xos.request.types.GetTPRequest;
+import com.otn.tool.common.internal.xos.response.IResponseExtractor;
+import com.otn.tool.common.internal.xos.response.IllegalResponseException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class GetTPExtractor implements IResponseExtractor<TPmgr_I_GetTPresp_T> {
 	private static Log log = LogFactory.getLog(GetTPExtractor.class);

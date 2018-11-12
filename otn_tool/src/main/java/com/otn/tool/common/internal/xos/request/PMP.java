@@ -1,12 +1,12 @@
 package com.otn.tool.common.internal.xos.request;
 
+import com.alu.tools.basic.function.IPredicate;
+import com.alu.tools.basic.function.PredicateUtil;
+import com.otn.tool.common.internal.xos.request.EmlAttributes.PMP.SnmpPmDomain;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.otn.tool.common.internal.xos.request.EmlAttributes.PMP.SnmpPmDomain;
-import com.alu.tools.basic.function.IPredicate;
-import com.alu.tools.basic.function.PredicateUtil;
 
 public class PMP {
 	public static enum Location {

@@ -1,10 +1,10 @@
 package com.otn.tool.common.utils;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.otn.tool.common.internal.xos.request.PMP;
 import com.otn.tool.common.internal.xos.request.XosPmpService;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class GetAllPMP {
 	

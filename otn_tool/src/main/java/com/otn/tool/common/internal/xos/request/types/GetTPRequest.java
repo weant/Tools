@@ -1,8 +1,8 @@
 package com.otn.tool.common.internal.xos.request.types;
 
-import com.otn.tool.common.internal.xos.request.SingleXosRequest;
 import com.lucent.oms.xml.naInterface.DsCommon_TPname_T;
 import com.lucent.oms.xml.naInterface.TPmgr_I_GetTPrqst_T;
+import com.otn.tool.common.internal.xos.request.SingleXosRequest;
 
 public class GetTPRequest extends SingleXosRequest {
 	public static final String REQ_OP_NAME = "TPmgr_I_getTP";

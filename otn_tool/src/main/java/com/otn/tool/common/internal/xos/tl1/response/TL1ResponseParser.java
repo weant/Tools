@@ -1,14 +1,14 @@
 package com.otn.tool.common.internal.xos.tl1.response;
 
+import com.alu.tools.basic.collection.Pair;
+import com.otn.tool.common.internal.xos.response.IllegalResponseException;
+import com.otn.tool.common.internal.xos.tl1.util.TL1Constants;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
-import com.otn.tool.common.internal.xos.response.IllegalResponseException;
-import com.otn.tool.common.internal.xos.tl1.util.TL1Constants;
-import com.alu.tools.basic.collection.Pair;
 
 public class TL1ResponseParser
 {

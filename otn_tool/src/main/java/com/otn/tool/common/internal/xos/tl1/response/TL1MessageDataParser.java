@@ -1,10 +1,10 @@
 package com.otn.tool.common.internal.xos.tl1.response;
 
-import java.util.regex.Pattern;
-
-import com.otn.tool.common.internal.xos.tl1.util.TL1Constants;
 import com.alu.tools.basic.StringUtil;
 import com.alu.tools.basic.collection.Pair;
+import com.otn.tool.common.internal.xos.tl1.util.TL1Constants;
+
+import java.util.regex.Pattern;
 
 public class TL1MessageDataParser
 {

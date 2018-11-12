@@ -1,11 +1,11 @@
 package com.otn.tool.common.internal.xos.response.extractors;
 
+import com.alu.tools.basic.collection.Container;
+import com.lucent.oms.xml.naInterface.Message_T;
 import com.otn.tool.common.internal.xos.response.IResponseExtractor;
 import com.otn.tool.common.internal.xos.response.IllegalResponseException;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
 import com.otn.tool.common.internal.xos.tl1.response.TL1ResponseParser;
-import com.alu.tools.basic.collection.Container;
-import com.lucent.oms.xml.naInterface.Message_T;
 
 public class TL1ResponseExtractor implements IResponseExtractor<TL1Response>
 {

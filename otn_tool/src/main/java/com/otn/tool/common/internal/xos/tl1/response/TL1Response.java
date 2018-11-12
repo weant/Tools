@@ -1,9 +1,9 @@
 package com.otn.tool.common.internal.xos.tl1.response;
 
-import java.util.Date;
-
 import com.otn.tool.common.internal.xos.response.TL1ResponseFailureException;
 import com.otn.tool.common.internal.xos.tl1.util.TL1Format;
+
+import java.util.Date;
 
 public class TL1Response extends TL1GenericMessage
 {

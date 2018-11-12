@@ -1,9 +1,9 @@
 package com.otn.tool.common.internal.xos.request;
 
-import java.util.List;
-
 import com.otn.tool.common.internal.xos.response.extractors.GetAllPMPExtractor;
 import com.otn.tool.common.internal.xos.util.XosOperation;
+
+import java.util.List;
 
 public class XosPmpService {
 

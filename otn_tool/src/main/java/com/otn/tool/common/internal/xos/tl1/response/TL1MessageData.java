@@ -1,13 +1,9 @@
 package com.otn.tool.common.internal.xos.tl1.response;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import com.otn.tool.common.internal.xos.tl1.util.TL1Format;
 import com.alu.tools.basic.collection.CollectionUtil;
+import com.otn.tool.common.internal.xos.tl1.util.TL1Format;
+
+import java.util.*;
 
 public class TL1MessageData
 {

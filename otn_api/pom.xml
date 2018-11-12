@@ -6,7 +6,7 @@
     <version>1.0</version>
 
     <modules>
-		<module>model</module>
+      	<module>model</module>
         <module>server</module>
         <module>client</module>
     </modules>

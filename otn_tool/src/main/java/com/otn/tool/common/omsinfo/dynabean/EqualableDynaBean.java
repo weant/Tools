@@ -1,12 +1,12 @@
 package com.otn.tool.common.omsinfo.dynabean;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.apache.commons.beanutils.BasicDynaBean;
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * 

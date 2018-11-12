@@ -1,8 +1,5 @@
 package com.otn.tool.common.internal.xos.request;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.otn.tool.common.utils.ConfigKey;
 import com.otn.tool.common.internal.xos.request.types.TL1CutThroughRequest;
 import com.otn.tool.common.internal.xos.response.IResponseExtractor;
 import com.otn.tool.common.internal.xos.response.XosResponse;
@@ -14,6 +11,9 @@ import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
 import com.otn.tool.common.internal.xos.util.CastorUtil;
 import com.otn.tool.common.internal.xos.util.XosException;
+import com.otn.tool.common.utils.ConfigKey;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 public class RequestUtil {
 

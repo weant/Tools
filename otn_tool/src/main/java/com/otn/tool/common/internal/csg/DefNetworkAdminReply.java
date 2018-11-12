@@ -1,23 +1,14 @@
 package com.otn.tool.common.internal.csg;
 
-import org.omg.CORBA.Context;
-import org.omg.CORBA.ContextList;
-import org.omg.CORBA.DomainManager;
-import org.omg.CORBA.ExceptionList;
-import org.omg.CORBA.NVList;
-import org.omg.CORBA.NamedValue;
-import org.omg.CORBA.Object;
-import org.omg.CORBA.Policy;
-import org.omg.CORBA.Request;
-import org.omg.CORBA.SetOverrideType;
-import org.omg.CosNotification.Property;
-
 import alu.nbi.opticscsg.NetworkAdministrationReply.NetworkAdminReply;
 import alu.nbi.opticscsg.NetworkDefs.ActionInfosListMore;
 import alu.nbi.opticscsg.NetworkDefs.ActionInfosMore;
 import alu.nbi.opticscsg.NetworkDefs.ActionResult;
 import alu.nbi.opticscsg.NetworkDefs.ActionStatus;
 import alu.nbi.opticscsg.OpticsIMIdlNeAction.IdlNeActPackage.ArchivingModeStruct;
+import org.omg.CORBA.*;
+import org.omg.CORBA.Object;
+import org.omg.CosNotification.Property;
 
 public class DefNetworkAdminReply implements NetworkAdminReply
 {

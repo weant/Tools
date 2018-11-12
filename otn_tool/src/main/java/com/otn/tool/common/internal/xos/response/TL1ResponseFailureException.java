@@ -1,10 +1,10 @@
 package com.otn.tool.common.internal.xos.response;
 
-import java.util.List;
-
+import com.alu.tools.basic.StringJoiner;
 import com.otn.tool.common.internal.xos.tl1.response.ResponseStatus;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
-import com.alu.tools.basic.StringJoiner;
+
+import java.util.List;
 
 public class TL1ResponseFailureException extends IllegalResponseException
 {

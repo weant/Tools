@@ -1,10 +1,10 @@
 package com.otn.tool.common.internal.xos.request.types;
 
-import com.otn.tool.common.internal.xos.request.SingleXosRequest;
 import com.lucent.oms.xml.naInterface.DsCommon_NEId_T;
 import com.lucent.oms.xml.naInterface.GlobalDefs_NVSList_T;
 import com.lucent.oms.xml.naInterface.GlobalDefs_NameAndValueString_T;
 import com.lucent.oms.xml.naInterface.NEmgrExt_I_GetNEtimerqst_T;
+import com.otn.tool.common.internal.xos.request.SingleXosRequest;
 
 public class GetNeTimeRequest extends SingleXosRequest {
 	public static final String REQ_OP_NAME = "NEmgrExt_I_getNEtime";

@@ -1,18 +1,13 @@
 package com.otn.tool.common.internal.xos.response.extractors;
 
+import com.alu.tools.basic.collection.Container;
+import com.lucent.oms.xml.naInterface.*;
+import com.otn.tool.common.internal.xos.response.IResponseExtractor;
+import com.otn.tool.common.internal.xos.response.IllegalResponseException;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.LazyDynaMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.otn.tool.common.internal.xos.response.IResponseExtractor;
-import com.otn.tool.common.internal.xos.response.IllegalResponseException;
-import com.alu.tools.basic.collection.Container;
-import com.lucent.oms.xml.naInterface.DsTPdata_LayeredParameters_T;
-import com.lucent.oms.xml.naInterface.DsTPdata_TerminationPoint_T;
-import com.lucent.oms.xml.naInterface.GlobalDefs_NameAndValueString_T;
-import com.lucent.oms.xml.naInterface.Message_T;
-import com.lucent.oms.xml.naInterface.TPmgr_I_GetTPWithAdditionalInforesp_T;
 
 
 public class GetOpPowerExtractor implements IResponseExtractor<DynaBean> {

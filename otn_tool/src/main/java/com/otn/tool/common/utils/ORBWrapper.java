@@ -1,13 +1,13 @@
 package com.otn.tool.common.utils;
 
-import java.util.Properties;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAHelper;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+
+import java.util.Properties;
 
 public class ORBWrapper {
 	private static Log log = LogFactory.getLog(ORBWrapper.class);

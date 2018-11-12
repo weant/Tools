@@ -1,21 +1,17 @@
 package com.otn.tool.common.omsinfo;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 import com.otn.tool.common.properties.OmsConf;
 import com.otn.tool.common.sftp.FtpFile;
 import com.otn.tool.common.sftp.SFtpFileImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
 
 
 public class SyncOracleWallet {

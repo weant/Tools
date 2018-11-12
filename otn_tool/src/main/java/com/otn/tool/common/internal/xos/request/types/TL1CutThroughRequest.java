@@ -1,10 +1,10 @@
 package com.otn.tool.common.internal.xos.request.types;
 
-import com.otn.tool.common.internal.xos.request.SingleXosRequest;
-import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.lucent.oms.xml.naInterface.DsCommon_NEname_T;
 import com.lucent.oms.xml.naInterface.DsTL1mgnt_TL1req_T;
 import com.lucent.oms.xml.naInterface.TL1CutThroughMgr_I_SendTL1Commandrqst_T;
+import com.otn.tool.common.internal.xos.request.SingleXosRequest;
+import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 
 public class TL1CutThroughRequest extends SingleXosRequest
 {

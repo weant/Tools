@@ -1,20 +1,15 @@
 package com.otn.tool.common.omsinfo;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.alu.tools.basic.exception.IoRuntimeException;
+import com.alu.tools.basic.io.FileUtil;
 import com.otn.tool.common.properties.OmsConf;
 import com.otn.tool.common.utils.SshConnect;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.alu.tools.basic.exception.IoRuntimeException;
-import com.alu.tools.basic.io.FileUtil;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 public class SyncOracleTnsNames {
 
