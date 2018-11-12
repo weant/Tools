@@ -2,9 +2,7 @@ package com.otn.tool.api;
 
 import com.otn.tool.model.ConnectionOp;
 import com.otn.tool.model.NeTps;
-import com.otn.tool.model.SuccessInfo;
 import com.otn.tool.model.TpOp;
-import org.apache.shiro.util.StringUtils;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
