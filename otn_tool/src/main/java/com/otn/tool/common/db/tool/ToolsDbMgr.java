@@ -19,15 +19,11 @@ import java.util.Map;
 public class ToolsDbMgr extends AbstractDbManager {
     private static Log log = LogFactory.getLog(ToolsDbMgr.class);
     private static ToolsDbMgr mgr = new ToolsDbMgr();
-    private String url;
-    private String userName;
-    private String psw;
+    private String dbPath;
 
     public ToolsDbMgr(){
         Map<String,String> map = Conf.instance().getPropertiesMap();
-        this.userName = map.get("db.userName");
-        this.psw = map.get("db.password");
-        this.url = "jdbc:postgresql://" + map.get("db.host") + ":" + map.get("db.port") + "/" + map.get("db.dbaName")+"?characterEncoding=utf8";
+        this.dbPath = map.get("db.path");
     }
 
     public static ToolsDbMgr instance(){
@@ -37,12 +33,13 @@ public class ToolsDbMgr extends AbstractDbManager {
         }
         return mgr;
     }
+
     @Override
     public Connection getConnection() throws SQLException {
-        String driverName = "org.postgresql.Driver";
+        String driverName = "org.sqlite.JDBC";
         try {
             Class.forName(driverName);
-            return DriverManager.getConnection(url, userName, psw);
+            return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("DB getConnection exception", e);

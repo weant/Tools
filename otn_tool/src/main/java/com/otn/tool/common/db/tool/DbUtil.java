@@ -22,7 +22,6 @@ public class DbUtil {
         dbm  = ToolsDbMgr.instance();
     }
 
-    //this method will be delete in the future
     public DbUtil(DbManager dbm) {
         this.dbm = dbm;
     }
@@ -320,7 +319,7 @@ public class DbUtil {
      * 适用的场景如向某张表中批量插入记录
      *
      * @param sql
-     * @param paramLists
+     * @param paramList
      */
     public void doBatchSql(String sql, List<Object[]> paramList) {
         log.info("SQL: "+sql);
@@ -339,9 +338,10 @@ public class DbUtil {
             if (paramList != null) {
                 for (Object[] params : paramList) {
 
-                    if (params == null)
+                    if (params == null) {
                         throw new IllegalArgumentException(
                                 "param can't be null");
+                    }
                     for (int i = 0, length = params.length; i < length; i++) {
                         Object paramI = params[i];
                         if(paramI instanceof byte[]){

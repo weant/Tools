@@ -17,17 +17,17 @@ import org.apache.commons.logging.LogFactory;
 /**
  *
  */
-public class ICONClassifyMgr {
-	private static ICONClassifyMgr instance;
-	private static Log log = LogFactory.getLog(ICONClassifyMgr.class);
+public class IconMgr {
+	private static IconMgr instance;
+	private static Log log = LogFactory.getLog(IconMgr.class);
 	
-	private ICONClassifyMgr() {
+	private IconMgr() {
 	}
 	
 	
-	public static ICONClassifyMgr instance() {
+	public static IconMgr instance() {
 		if (instance == null) {
-			instance = new ICONClassifyMgr();
+			instance = new IconMgr();
 		}
 		return instance;
 	}

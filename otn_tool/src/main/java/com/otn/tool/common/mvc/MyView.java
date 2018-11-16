@@ -5,7 +5,7 @@ import fi.mmm.yhteinen.swing.core.component.YPanel;
 
 /**
  */
-public abstract class BaseView extends YPanel {
+public abstract class MyView extends YPanel {
 	
 		
 	/**
@@ -32,7 +32,7 @@ public abstract class BaseView extends YPanel {
 	 * @return
 	 */
 	public Image getViewIconImage(){
-		return ICONClassifyMgr.instance().getImage("test.png", "/conf/icons/");
+		return IconMgr.instance().getImage("test.png", "/conf/icons/");
 		 
 	 }
 		

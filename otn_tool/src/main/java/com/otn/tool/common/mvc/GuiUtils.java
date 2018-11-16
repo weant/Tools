@@ -4,7 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-public class GUIUtil {
+public class GuiUtils {
 
 	public static int getFrameLocationY(int frameHeight) {
 		//获取屏幕的高
