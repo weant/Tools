@@ -21,7 +21,7 @@ public class MyController extends YController {
 	private int x = 800;
 	private int y = 600;
 	
-	public void showView(){
+	public void showView(int operation){
 		YIComponent component = this.getView();
 		if(component instanceof MyView){
 			MyView view = (MyView)component;
@@ -37,7 +37,8 @@ public class MyController extends YController {
 			frame.setIconImage(view.getViewIconImage());
 			frame.setContentPane(view);
 			frame.setSize(view.getWidth(), view.getHeight());
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setDefaultCloseOperation(operation);
+			//frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //			frame.addWindowListener(new WindowAdapter() {
 //				   public void windowClosing(WindowEvent e) {
 //					   hiddenView();
@@ -54,7 +55,7 @@ public class MyController extends YController {
 		}
 	}
 	
-	public void showDialogView(){
+	public void showDialogView(int operation){
 		YIComponent component = this.getView();
 		if(component instanceof MyView){
 			MyView view = (MyView)component;
@@ -68,7 +69,8 @@ public class MyController extends YController {
 			dialog.setIconImage(view.getViewIconImage());
 			dialog.setContentPane(view);
 			dialog.setSize(view.getWidth(), view.getHeight());
-			dialog.setDefaultCloseOperation(YDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(operation);
+			//dialog.setDefaultCloseOperation(YDialog.DISPOSE_ON_CLOSE);
 			dialog.addWindowListener(new WindowAdapter() {
 				   public void windowClosing(WindowEvent e) {
 					   hiddenDialogView();

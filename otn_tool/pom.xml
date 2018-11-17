@@ -161,14 +161,26 @@
       <systemPath>${basedir}/libs/basicTools.jar</systemPath>
     </dependency>
     <dependency>
+      <groupId>com.otn.tool</groupId>
+      <artifactId>liquidlnf</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/libs/liquidlnf.jar</systemPath>
+    </dependency>
+    <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>1.2</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.4</version>
+    </dependency>-->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>

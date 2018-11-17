@@ -32,7 +32,7 @@ public abstract class MyView extends YPanel {
 	 * @return
 	 */
 	public Image getViewIconImage(){
-		return IconMgr.instance().getImage("test.png", "/conf/icons/");
+		return IconMgr.instance().getImage("test.png", "icons/");
 		 
 	 }
 		
