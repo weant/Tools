@@ -156,7 +156,7 @@ public class EditableHeader extends JTableHeader implements CellEditorListener {
 
 	transient protected TableCellEditor cellEditor;
 
-	private static ImageIcon filterIcon = new ImageIcon("/conf/icon/filter.png");
+	private static ImageIcon filterIcon = new ImageIcon("/icon/filter.png");
 	transient protected Component editorComp;
 	private EditableHeaderTableColumn[] newCols;
 	protected boolean notEditableHeaderVisible;
