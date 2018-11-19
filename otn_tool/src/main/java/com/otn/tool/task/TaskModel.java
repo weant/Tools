@@ -1,4 +1,4 @@
-package com.otn.tool.common.task;
+package com.otn.tool.task;
 
 import fi.mmm.yhteinen.swing.core.YModel;
 

@@ -1,4 +1,4 @@
-package com.otn.tool.common.task;
+package com.otn.tool.task;
 
 import com.otn.tool.common.mvc.FilterHeaderTable;
 import com.otn.tool.common.mvc.ImageButton;
@@ -63,12 +63,12 @@ public class TaskView extends MyView {
         JPanel panel = new JPanel(new BorderLayout());
         toolBar = new JToolBar("工具栏");// 创建工具栏对象
         toolBar.setFloatable(false);// 设置为不允许拖动
-        ImageIcon newIcon = new ImageIcon("F:/Workspace/Tools/conf/icon/new.png");
-        ImageIcon removeIcon = new ImageIcon("F:/Workspace/Tools/conf/icon/remove.png");
-        ImageIcon updateIcon = new ImageIcon("F:/Workspace/Tools/conf/icon/update.png");
-        ImageIcon exeIcon = new ImageIcon("F:/Workspace/Tools/conf/icon/exe.png");
-        ImageIcon downloadIcon = new ImageIcon("F:/Workspace/Tools/conf/icon/download.png");
-        ImageIcon exitIcon = new ImageIcon("F:/Workspace/Tools/conf/icon/exit.png");
+        ImageIcon newIcon = new ImageIcon("./icon/new.png");
+        ImageIcon removeIcon = new ImageIcon("./icon/remove.png");
+        ImageIcon updateIcon = new ImageIcon("./icon/update.png");
+        ImageIcon exeIcon = new ImageIcon("./icon/exe.png");
+        ImageIcon downloadIcon = new ImageIcon("./icon/download.png");
+        ImageIcon exitIcon = new ImageIcon("./icon/exit.png");
 
         newGroupButton = new ImageButton(newIcon, null, null, "创建任务组");
         modifyGroupButton = new ImageButton(updateIcon, null, null, "修改任务组");
@@ -99,13 +99,14 @@ public class TaskView extends MyView {
         JPanel panel = new JPanel(new BorderLayout());
 
         YColumn[] tpYColumn = new YColumn[] {
-                new YColumn("groupName", "任务组名称", 100, false),
-                new YColumn("neName", "时间间隔"),
-                new YColumn("localName", "单位"),
-                new YColumn("portName", "开始时间"),
-                new YColumn("time","结束时间"),
-                new YColumn("reciveLuminousPower", "上次执行时间"),
-                new YColumn("recieveLimit", "进度")};
+                new YColumn("name", "任务组名称", 100, false),
+                new YColumn("interval", "执行间隔", 20, false),
+                new YColumn("unit", "间隔单位",10, false),
+                new YColumn("state", "状态",10, false),
+                new YColumn("starttime", "开始时间",100, false),
+                new YColumn("endtime","结束时间",100, false),
+                new YColumn("lastexetime", "上次执行时间",100, false),
+                new YColumn("progress", "进度",10, false)};
 
         takGroupTable = new FilterHeaderTable(tpYColumn) {
 
@@ -119,17 +120,6 @@ public class TaskView extends MyView {
 
                         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,boolean hasFocus, int row, int column) {
                             int modelIndex = takGroupTable.convertRowIndexToModel(row);
-                            /*OpBean bean = (OpBean) takGroupTable.getObject(modelIndex);
-                            takGroupTable.setSelectionBackground(selectionBackground);
-                            if ((column == 4 && bean.isReceiveOverThreshold()) || (column == 6 && bean.isSendOverThreshold())) {
-                                this.setBackground(Color.red);
-                            }else if (isSelected) {
-                                this.setBackground(new Color(169,209,255));
-                            } else if (row % 2 == 0) {
-                                this.setBackground(Color.white);
-                            } else {
-                                this.setBackground(new Color(238, 246, 246));
-                            }*/
                             this.setText((String)value);
                             this.setFont(new Font("Dialog.plain", 0, 13));
                             return this;

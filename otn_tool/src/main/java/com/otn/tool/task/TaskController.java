@@ -1,4 +1,4 @@
-package com.otn.tool.common.task;
+package com.otn.tool.task;
 
 import com.otn.tool.common.mvc.MyController;
 
@@ -16,6 +16,17 @@ public class TaskController extends MyController {
 
     public static void main(String[] args) {
         TaskController controller = new TaskController();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         controller.showView(JFrame.EXIT_ON_CLOSE);
     }
 }
