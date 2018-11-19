@@ -20,7 +20,8 @@ public abstract class PropertiesConfig {
 		try {
 			File currentDir = new File(".");
 			String confFilePath = currentDir.getAbsolutePath() + getConfFile();
-			properties.load(new FileReader(confFilePath));
+			//properties.load(new FileReader(confFilePath));
+			properties.load(new InputStreamReader(new FileInputStream(confFilePath), "UTF-8"));
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -91,12 +92,7 @@ public abstract class PropertiesConfig {
 		}
 		return valueTokey.get(value);
 	}
-	/**
-	 * 删除键值对
-	 * @param key
-	 * @param value
-	 * @return
-	 */
+
 	public boolean saveProperties() {
 		try {
 			OutputStream fos = new FileOutputStream(new File(".").getAbsolutePath() + getConfFile());

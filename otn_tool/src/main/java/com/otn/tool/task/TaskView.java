@@ -3,6 +3,7 @@ package com.otn.tool.task;
 import com.otn.tool.common.mvc.FilterHeaderTable;
 import com.otn.tool.common.mvc.ImageButton;
 import com.otn.tool.common.mvc.MyView;
+import com.otn.tool.common.utils.I18N;
 import fi.mmm.yhteinen.swing.core.component.YScrollPane;
 import fi.mmm.yhteinen.swing.core.component.menu.YMenu;
 import fi.mmm.yhteinen.swing.core.component.menu.YMenuBar;
@@ -34,10 +35,9 @@ public class TaskView extends MyView {
     private ImageButton modifyGroupButton;
     private ImageButton deleteGroupButton;
     private ImageButton executeButton;
-    private ImageButton exportButton;
+    private ImageButton viewButton;
     private ImageButton exitButton;
     private FilterHeaderTable takGroupTable;
-    private int rowSelected;
     private YMenuItem newGroupPop;
     private YMenuItem modifyGroupPop;
     private YMenuItem deleteGroupPop;
@@ -61,21 +61,21 @@ public class TaskView extends MyView {
 
     public Component createTop() {
         JPanel panel = new JPanel(new BorderLayout());
-        toolBar = new JToolBar("工具栏");// 创建工具栏对象
+        toolBar = new JToolBar();// 创建工具栏对象
         toolBar.setFloatable(false);// 设置为不允许拖动
         ImageIcon newIcon = new ImageIcon("./icon/new.png");
         ImageIcon removeIcon = new ImageIcon("./icon/remove.png");
         ImageIcon updateIcon = new ImageIcon("./icon/update.png");
+        ImageIcon downloadIcon = new ImageIcon("./icon/view.png");
         ImageIcon exeIcon = new ImageIcon("./icon/exe.png");
-        ImageIcon downloadIcon = new ImageIcon("./icon/download.png");
         ImageIcon exitIcon = new ImageIcon("./icon/exit.png");
 
-        newGroupButton = new ImageButton(newIcon, null, null, "创建任务组");
-        modifyGroupButton = new ImageButton(updateIcon, null, null, "修改任务组");
-        deleteGroupButton = new ImageButton(removeIcon, null, null, "删除任务组");
-        executeButton = new ImageButton(exeIcon, null, null, "手动执行");
-        exportButton = new ImageButton(downloadIcon, null, null, "导出结果");
-        exitButton = new ImageButton(exitIcon, null, null, "退出");
+        newGroupButton = new ImageButton(newIcon, null, null, getString("task.group.new"));
+        modifyGroupButton = new ImageButton(updateIcon, null, null, getString("task.group.alter"));
+        deleteGroupButton = new ImageButton(removeIcon, null, null, getString("task.group.delete"));
+        executeButton = new ImageButton(exeIcon, null, null, getString("task.group.execute"));
+        viewButton = new ImageButton(downloadIcon, null, null, getString("task.group.view.result"));
+        exitButton = new ImageButton(exitIcon, null, null, getString("tool.exit"));
 
         toolBar.add(newGroupButton);
         toolBar.addSeparator();
@@ -83,9 +83,9 @@ public class TaskView extends MyView {
         toolBar.addSeparator();
         toolBar.add(deleteGroupButton);
         toolBar.addSeparator();
-        toolBar.add(executeButton);
+        toolBar.add(viewButton);
         toolBar.addSeparator();
-        toolBar.add(exportButton);
+        toolBar.add(executeButton);
         toolBar.addSeparator();
         toolBar.add(exitButton);
 
@@ -99,14 +99,14 @@ public class TaskView extends MyView {
         JPanel panel = new JPanel(new BorderLayout());
 
         YColumn[] tpYColumn = new YColumn[] {
-                new YColumn("name", "任务组名称", 100, false),
-                new YColumn("interval", "执行间隔", 20, false),
-                new YColumn("unit", "间隔单位",10, false),
-                new YColumn("state", "状态",10, false),
-                new YColumn("starttime", "开始时间",100, false),
-                new YColumn("endtime","结束时间",100, false),
-                new YColumn("lastexetime", "上次执行时间",100, false),
-                new YColumn("progress", "进度",10, false)};
+                new YColumn("name", getString("task.group.name"), 100, false),
+                new YColumn("interval", getString("task.group.interval"), 20, false),
+                new YColumn("unit", getString("task.group.interval.unit"),10, false),
+                new YColumn("state", getString("task.group.state"),10, false),
+                new YColumn("startTime", getString("task.group.start.time"),100, false),
+                new YColumn("endTime", getString("task.group.end.time"),100, false),
+                new YColumn("lastExecuteTime", getString("task.group.last.execute.time"),100, false),
+                new YColumn("progress", getString("stask.group.progres"),10, false)};
 
         takGroupTable = new FilterHeaderTable(tpYColumn) {
 
@@ -145,26 +145,26 @@ public class TaskView extends MyView {
     public void initMenuBar() {
         menuBar =new YMenuBar();
         fileMenu=new YMenu();
-        fileMenu.setText("文件");
+        fileMenu.setText(getString("tool.file"));
         toolMenu=new YMenu();
-        toolMenu.setText("工具");
+        toolMenu.setText(getString("tool.tool"));
         newGroup = new YMenuItem();
-        newGroup.setText("新建任务组");
+        newGroup.setText(getString("task.group.new"));
         modifyGroup = new YMenuItem();
-        modifyGroup.setText("修改任务组");
+        modifyGroup.setText(getString("task.group.alter"));
 
         deleteGroup = new YMenuItem();
-        deleteGroup.setText("删除任务组");
+        deleteGroup.setText(getString("task.group.delete"));
         manualExec = new YMenuItem();
-        manualExec.setText("手动执行");
+        manualExec.setText(getString("task.group.execute"));
         viewResult = new YMenuItem();
-        viewResult.setText("查看结果");
+        viewResult.setText(getString("task.group.view.result"));
         exit = new YMenuItem();
-        exit.setText("退出");
+        exit.setText(getString("tool.exit"));
         viewTpOp = new YMenuItem();
-        viewTpOp.setText("查看端口光功率");
+        viewTpOp.setText(getString("tool.function.view.tp.op"));
         viewOchOp = new YMenuItem();
-        viewOchOp.setText("查看OCH光功率");
+        viewOchOp.setText(getString("tool.function.view.och.op"));
 
         menuBar.add(fileMenu);
         menuBar.add(toolMenu);
@@ -181,59 +181,16 @@ public class TaskView extends MyView {
     private JPopupMenu createMenus() {
         JPopupMenu menu = new JPopupMenu();
         newGroupPop = new YMenuItem();
-        newGroupPop.setText("新建任务组");
+        newGroupPop.setText(getString("task.group.new"));
         modifyGroupPop = new YMenuItem();
-        modifyGroupPop.setText("修改任务组");
+        modifyGroupPop.setText(getString("task.group.alter"));
 
         deleteGroupPop = new YMenuItem();
-        deleteGroupPop.setText("删除任务组");
+        deleteGroupPop.setText(getString("task.group.delete"));
         manualExecPop = new YMenuItem();
-        manualExecPop.setText("手动执行");
+        manualExecPop.setText(getString("task.group.execute"));
         viewResultPop = new YMenuItem();
-        viewResultPop.setText("查看结果");
-        newGroupPop.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-                    //Point point = tpTable.getSelectedRow();
-                    rowSelected = takGroupTable.getSelectedRow();
-                }
-            }
-        });
-
-        modifyGroupPop.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-                    //Point point = tpTable.getSelectedRow();
-                    rowSelected = takGroupTable.getSelectedRow();
-                }
-            }
-        });
-
-        deleteGroupPop.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-                    //Point point = tpTable.getSelectedRow();
-                    rowSelected = takGroupTable.getSelectedRow();
-                }
-            }
-        });
-        manualExecPop.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-                    //Point point = tpTable.getSelectedRow();
-                    rowSelected = takGroupTable.getSelectedRow();
-                }
-            }
-        });
-
-        viewResultPop.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-                    //Point point = tpTable.getSelectedRow();
-                    rowSelected = takGroupTable.getSelectedRow();
-                }
-            }
-        });
+        viewResultPop.setText(getString("task.group.view.result"));
 
         menu.add(newGroupPop);
         menu.add(modifyGroupPop);
@@ -254,6 +211,10 @@ public class TaskView extends MyView {
 
     @Override
     public String getViewTitle() {
-        return "OTN光功率查询工具";
+        return getString("tool.name");
+    }
+
+    public String getString(String string) {
+        return I18N.getInstance().getString(string);
     }
 }
