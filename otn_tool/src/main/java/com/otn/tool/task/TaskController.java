@@ -19,8 +19,7 @@ public class TaskController extends MyController {
         getFrame().setJMenuBar(view.getMenuBar());
         this.setUpMVC(model, view);
         initData();
-        // TODO: 2018/11/20
-        //将任务添加进任务调度器
+        // TODO: 2018/11/20 将任务添加进任务调度器
     }
 
     public void initData(){
@@ -30,6 +29,7 @@ public class TaskController extends MyController {
             if(!groups.isEmpty()) {
                 groups.forEach(group->group.setProgress(""));
                 initTaskForGrop();
+                // TODO: 2018/11/20 字段转换，日期，状态等等
             }
         }
     }
