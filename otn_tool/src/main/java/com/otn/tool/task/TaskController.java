@@ -30,7 +30,6 @@ public class TaskController extends MyController {
             if(!groups.isEmpty()) {
                 groups.forEach(group->group.setProgress(""));
                 initTaskForGrop();
-                System.out.print("aaa");
             }
         }
     }
