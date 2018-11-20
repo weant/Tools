@@ -1,6 +1,8 @@
 package com.otn.tool.common.mvc;
 
 import java.awt.Image;
+
+import com.otn.tool.common.properties.Conf;
 import fi.mmm.yhteinen.swing.core.component.YPanel;
 
 /**
@@ -32,7 +34,7 @@ public abstract class MyView extends YPanel {
 	 * @return
 	 */
 	public Image getViewIconImage(){
-		return IconMgr.instance().getImage("test.png", "icons/");
+		return IconMgr.instance().getImage("trafficStatistics16x16.png.png", Conf.instance().getProperty("icon.path"));
 		 
 	 }
 		

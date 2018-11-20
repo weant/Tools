@@ -23,6 +23,7 @@ public class ZHI18N extends PropertiesConfig {
     @Override
     protected String getConfFile() {
         // TODO Auto-generated method stub
-        return "/conf/i18n_zh.properties";
+        return Conf.instance().getProperty("zh.i18n.path");
+        //return "/conf/i18n_zh.properties";
     }
 }

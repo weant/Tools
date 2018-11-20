@@ -19,7 +19,7 @@ public class DbUtil {
     private DbManager dbm;
 
     public DbUtil(){
-        dbm  = ToolsDbMgr.instance();
+        dbm  = ToolDbMgr.instance();
     }
 
     public DbUtil(DbManager dbm) {

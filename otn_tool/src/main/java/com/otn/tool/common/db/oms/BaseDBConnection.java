@@ -5,19 +5,19 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class UTPDBConnection implements Connection {
+public class BaseDBConnection implements Connection {
 	private static String ORACLE_DRIVER = "oracle.jdbc.OracleDriver";
 
 	private Connection _conn;
 	private ConnectionPoolImpl _pool;
 	
-	UTPDBConnection(Connection conn, ConnectionPoolImpl pool) {
+	BaseDBConnection(Connection conn, ConnectionPoolImpl pool) {
 		_conn = conn;
 		_pool = pool;
 	}
 	
 	
-	UTPDBConnection(String host, int port, String sid, String user, String passwd, ConnectionPoolImpl pool) throws SQLException, ClassNotFoundException {
+	BaseDBConnection(String host, int port, String sid, String user, String passwd, ConnectionPoolImpl pool) throws SQLException, ClassNotFoundException {
 		Class.forName(ORACLE_DRIVER);
 		String url = "jdbc:oracle:thin:@" + host + ":" + port + ":" + sid;
 		_conn = DriverManager.getConnection(url, user, passwd);

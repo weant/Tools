@@ -1,9 +1,14 @@
 package com.otn.tool.task;
 
+import com.otn.tool.common.beans.Task;
+import com.otn.tool.common.beans.TaskGroup;
+import com.otn.tool.common.db.TaskDao;
 import com.otn.tool.common.mvc.MyController;
 import com.otn.tool.common.utils.I18N;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskController extends MyController {
     private TaskModel model = new TaskModel();
@@ -13,8 +18,38 @@ public class TaskController extends MyController {
         super();
         getFrame().setJMenuBar(view.getMenuBar());
         this.setUpMVC(model, view);
+        initData();
+        // TODO: 2018/11/20
+        //将任务添加进任务调度器
     }
 
+    public void initData(){
+        List<TaskGroup> groups = TaskDao.getInstance().getAllTaskGroups();
+        if(groups != null) {
+            model.setTakGroupTable(groups);
+            if(!groups.isEmpty()) {
+                groups.forEach(group->group.setProgress(""));
+                initTaskForGrop();
+                System.out.print("aaa");
+            }
+        }
+    }
+
+    public void initTaskForGrop(){
+        List<Task> tasks = TaskDao.getInstance().getAllTasks();
+        if(tasks != null) {
+            tasks.forEach(task->{
+                model.getTakGroupTable().forEach(group->{
+                    if(group.getId() == task.getGroupId()) {
+                        if(group.getTasks() == null) {
+                            group.setTasks(new ArrayList<>());
+                        }
+                        group.getTasks().add(task);
+                    }
+                });
+            });
+        }
+    }
 
     public void exitButtonPressed(){
         int choice = JOptionPane.showConfirmDialog(getFrame(), getString("tool.exit.confirm"), getString("tool.message"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

@@ -1,6 +1,6 @@
 package com.otn.tool.common.internal.xos.util;
 
-import com.otn.tool.common.db.tool.ToolsDbUtil;
+import com.otn.tool.common.db.tool.ToolDbUtil;
 import com.otn.tool.common.internal.xos.tl1.request.TL1Request;
 import com.otn.tool.common.internal.xos.tl1.response.TL1Response;
 
@@ -120,7 +120,7 @@ public class XosOperationBatchThread implements Callable<Void>{
 				tl1sch.get("response"),tl1sch.get("tl1constant")
 		};
 		try {
-			ToolsDbUtil.instance().execute(sql, param);
+			ToolDbUtil.instance().execute(sql, param);
 		} catch (Exception e) {
 			this.param.getLogs().add(getlogHead() + "insert oper exception:" + e.getMessage());
 		}
@@ -135,7 +135,7 @@ public class XosOperationBatchThread implements Callable<Void>{
 		};
 		
 		try {
-			ToolsDbUtil.instance().execute(sql, param);
+			ToolDbUtil.instance().execute(sql, param);
 		} catch (Exception e) {
 			this.param.getLogs().add(getlogHead() + "update oper exception:" + e.getMessage());
 		}
@@ -157,7 +157,7 @@ public class XosOperationBatchThread implements Callable<Void>{
 			" and equipaId='" + param.getAid() + "' and tl1Constant='" + param.getTl1Constants() + "'";
 		
 		try {
-			List<HashMap<Object, Object>> result = ToolsDbUtil.instance().query(sql);
+			List<HashMap<Object, Object>> result = ToolDbUtil.instance().query(sql);
 			if(result != null && result.size() > 0)
 				return result.get(0);
 		} catch (Exception e) {

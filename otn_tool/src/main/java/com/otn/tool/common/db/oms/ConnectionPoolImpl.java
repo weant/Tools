@@ -11,8 +11,8 @@ import java.util.LinkedList;
 
 public class ConnectionPoolImpl implements ConnectionPool {
 	Log log = LogFactory.getLog(ConnectionPoolImpl.class);
-	private LinkedList<UTPDBConnection> notUsedConnection = new LinkedList<UTPDBConnection>();
-	private HashSet<UTPDBConnection> usedConnection = new HashSet<UTPDBConnection>();
+	private LinkedList<BaseDBConnection> notUsedConnection = new LinkedList<BaseDBConnection>();
+	private HashSet<BaseDBConnection> usedConnection = new HashSet<BaseDBConnection>();
 	
 	private String _host;
 	private String _ip;
@@ -103,7 +103,7 @@ public class ConnectionPoolImpl implements ConnectionPool {
 	
 	
 	
-	synchronized void recycleConnection(UTPDBConnection conn) {
+	synchronized void recycleConnection(BaseDBConnection conn) {
 		boolean exist = usedConnection.remove(conn);
 		if (exist) {
 			notUsedConnection.addLast(conn);

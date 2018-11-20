@@ -119,10 +119,17 @@ public class TaskView extends MyView {
                         private static final long serialVersionUID = -738787952719828357L;
 
                         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,boolean hasFocus, int row, int column) {
-                            int modelIndex = takGroupTable.convertRowIndexToModel(row);
+                            Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                            if (row % 2 == 0) {
+                                comp.setBackground(Color.white);
+                            } else if (row % 2 == 1) {
+                                comp.setBackground(new Color(238, 246, 255));
+                            }
+
+                            //int modelIndex = takGroupTable.convertRowIndexToModel(row);
                             this.setText((String)value);
-                            this.setFont(new Font("Dialog.plain", 0, 13));
-                            return this;
+                            comp.setFont(new Font("Dialog.plain", 0, 13));
+                            return comp;
                         }
                     };
                 }

@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ToolsDbUtil {
-    private static Log log = LogFactory.getLog(ToolsDbUtil.class);
-    private static ToolsDbUtil util = new ToolsDbUtil();
-    private DbUtil mgr = new DbUtil(ToolsDbMgr.instance());
+public class ToolDbUtil {
+    private static Log log = LogFactory.getLog(ToolDbUtil.class);
+    private static ToolDbUtil util = new ToolDbUtil();
+    private DbUtil mgr = new DbUtil(ToolDbMgr.instance());
 
-    private ToolsDbUtil() {
+    private ToolDbUtil() {
 
     }
 
-    public static ToolsDbUtil instance() {
+    public static ToolDbUtil instance() {
         return util;
     }
 
@@ -30,7 +30,7 @@ public class ToolsDbUtil {
      * @param sql
      * @param params
      * @return
-     * @throws SQLException
+     * @throws
      */
     public List<HashMap<Object,Object>> query(String sql, Object[] params) {
         return mgr.query(sql, params);
@@ -40,7 +40,7 @@ public class ToolsDbUtil {
      * 不带参的sql查询
      * @param sql
      * @return
-     * @throws SQLException
+     * @throws
      */
     public List<HashMap<Object,Object>> query(String sql) {
         return mgr.query(sql, null);
@@ -60,7 +60,7 @@ public class ToolsDbUtil {
      * @param sql
      * @param params 参数list的size与查询执行次数一致
      * @return
-     * @throws SQLException
+     * @throws
      */
     public List<HashMap<Object,Object>> queryBatch(String sql, List<Object[]> params)  {
         List<HashMap<Object,Object>> resultList = new ArrayList<HashMap<Object,Object>>();
@@ -74,7 +74,7 @@ public class ToolsDbUtil {
      * 带参数（带?）的sql执行
      * @param sql
      * @param params
-     * @throws SQLException
+     * @throws
      */
     public void execute(String sql, Object[] params) {
         mgr.doSql(sql, params);
@@ -83,7 +83,7 @@ public class ToolsDbUtil {
     /**
      * 不带参的sql执行
      * @param sql
-     * @throws SQLException
+     * @throws
      */
     public void execute(String sql) {
         mgr.doSql(sql, null);
@@ -93,7 +93,7 @@ public class ToolsDbUtil {
      * 批量执行新增、修改、删除，一个带参的sql多个不同值的参数传入
      * @param sql
      * @param params
-     * @throws SQLException
+     * @throws
      */
     public void executeBatch(String sql, List<Object[]> params) {
         mgr.doBatchSql(sql, params);
@@ -106,5 +106,10 @@ public class ToolsDbUtil {
      */
     public void executeBatch(String[] sqls){
         mgr.doBatchSql(sqls);
+    }
+
+
+    public static void main(String[] args){
+        ToolDbUtil.instance().query("select * from taskgroup");
     }
 }

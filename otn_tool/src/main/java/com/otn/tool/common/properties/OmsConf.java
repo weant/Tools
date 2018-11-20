@@ -23,7 +23,8 @@ public class OmsConf extends PropertiesConfig {
     @Override
     protected String getConfFile() {
         // TODO Auto-generated method stub
-        return "/conf/omsConf.properties";
+        return Conf.instance().getProperty("oms.path");
+        //return "/conf/omsConf.properties";
     }
 
 }

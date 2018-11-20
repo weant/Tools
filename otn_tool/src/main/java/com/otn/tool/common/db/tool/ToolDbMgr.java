@@ -1,8 +1,8 @@
 /**
- * FileName: ToolsDbMgr
+ * FileName: ToolDbMgr
  * Author:   Administrator
  * Date:     2018/11/6 23:19
- * Description: ToolsDbMgr
+ * Description: ToolDbMgr
  */
 package com.otn.tool.common.db.tool;
 
@@ -16,20 +16,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class ToolsDbMgr extends AbstractDbManager {
-    private static Log log = LogFactory.getLog(ToolsDbMgr.class);
-    private static ToolsDbMgr mgr = new ToolsDbMgr();
+public class ToolDbMgr extends AbstractDbManager {
+    private static Log log = LogFactory.getLog(ToolDbMgr.class);
+    private static ToolDbMgr mgr = new ToolDbMgr();
     private String dbPath;
 
-    public ToolsDbMgr(){
+    public ToolDbMgr(){
         Map<String,String> map = Conf.instance().getPropertiesMap();
         this.dbPath = map.get("db.path");
     }
 
-    public static ToolsDbMgr instance(){
+    public static ToolDbMgr instance(){
         if(mgr == null)
         {
-            mgr = new ToolsDbMgr();
+            mgr = new ToolDbMgr();
         }
         return mgr;
     }
