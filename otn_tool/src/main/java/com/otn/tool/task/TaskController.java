@@ -3,16 +3,23 @@ package com.otn.tool.task;
 import com.otn.tool.common.beans.Task;
 import com.otn.tool.common.beans.TaskGroup;
 import com.otn.tool.common.db.TaskDao;
+import com.otn.tool.common.enums.Period;
+import com.otn.tool.common.enums.TaskState;
 import com.otn.tool.common.mvc.MyController;
 import com.otn.tool.common.utils.I18N;
+import com.otn.tool.common.utils.TimeUtilities;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TaskController extends MyController {
     private TaskModel model = new TaskModel();
     private TaskView view = new TaskView();
+    private static final String TIMESTAMP_FORMAT="yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_FORMAT="yyyy-MM-dd";
+    private static final String TIME_FORMAT="HH:mm:ss";
 
     public TaskController() {
         super();
@@ -27,9 +34,15 @@ public class TaskController extends MyController {
         if(groups != null) {
             model.setTakGroupTable(groups);
             if(!groups.isEmpty()) {
-                groups.forEach(group->group.setProgress(""));
+                groups.forEach(group->{
+                    group.setProgress("");
+                    group.setStartTime(getTimeString(group.getStartTime(), TIMESTAMP_FORMAT));
+                    group.setEndTime(getTimeString(group.getEndTime(), DATE_FORMAT));
+                    group.setLastExecuteTime(getTimeString(group.getLastExecuteTime(), TIMESTAMP_FORMAT));
+                    group.setState(TaskState.fromInt(Integer.valueOf(group.getState())).getValueString());
+                    group.setUnit(Period.fromInt(Integer.valueOf(group.getState())).getValueString());
+                });
                 initTaskForGrop();
-                // TODO: 2018/11/20 字段转换，日期，状态等等
             }
         }
     }
@@ -48,6 +61,12 @@ public class TaskController extends MyController {
                 });
             });
         }
+    }
+
+    private String getTimeString(String longTime, String format){
+        Date time = new Date();
+        time.setTime(Long.parseLong(longTime));
+        return TimeUtilities.instance().formatDate(time, format);
     }
 
     public void exitButtonPressed(){

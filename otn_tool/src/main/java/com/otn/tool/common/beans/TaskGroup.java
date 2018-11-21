@@ -11,7 +11,7 @@ import java.util.List;
 public class TaskGroup {
     long id;
     String name;
-    String interval;
+    int interval;
     String unit;
     String state;
     String startTime;
@@ -36,11 +36,11 @@ public class TaskGroup {
         this.name = name;
     }
 
-    public String getInterval() {
+    public int getInterval() {
         return interval;
     }
 
-    public void setInterval(String interval) {
+    public void setInterval(int interval) {
         this.interval = interval;
     }
 
