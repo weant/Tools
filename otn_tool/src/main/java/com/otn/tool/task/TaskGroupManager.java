@@ -88,7 +88,7 @@ public class TaskGroupManager {
 
     public boolean checkTaskValidityNow(TaskJob taskJob) {
         boolean valid = TimeUtilities.instance().isTimeValueInScope(
-                new Date().getTime(),
+                System.currentTimeMillis(),
                 TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getStartTime()).getTime(),
                 TimeUtilities.instance().parse("yyyy-MM-dd", taskJob.getTaskGroup().getEndTime()).getTime());
         if (!valid) {
