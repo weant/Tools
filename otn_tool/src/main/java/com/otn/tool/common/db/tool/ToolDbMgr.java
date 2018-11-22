@@ -11,6 +11,7 @@ import com.otn.tool.common.properties.Conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,7 +40,9 @@ public class ToolDbMgr extends AbstractDbManager {
         String driverName = "org.sqlite.JDBC";
         try {
             Class.forName(driverName);
-            return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+            File file = new File(".");
+            String path = file.getAbsolutePath() + dbPath;
+            return DriverManager.getConnection("jdbc:sqlite:" + path);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("DB getConnection exception", e);
