@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.SchedulerException;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -55,8 +54,7 @@ public class TaskGroupManager {
     public void addTask(TaskJob taskJob) throws Exception {
             String jobName = taskJob.getTaskGroup().getName();
             if (jobsMap.containsKey(jobName)) {
-                // in truth, it's a update operation.so we delete firstly, then
-                // add task
+                // in truth, it's a update operation.so we delete firstly, then add task
                 delete(taskJob);
                 jobsMap.remove(jobName);
             }
@@ -69,7 +67,7 @@ public class TaskGroupManager {
                                 TaskGroupJob.class,
                                 convertSchedTime(taskJob),
                                 TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getStartTime()),
-                                TimeUtilities.instance().parse("yyyy-MM-dd", taskJob.getTaskGroup().getEndTime()));
+                                TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getEndTime()));
 
                         jobsMap.put(jobName, taskJob);
                     }
@@ -90,7 +88,7 @@ public class TaskGroupManager {
         boolean valid = TimeUtilities.instance().isTimeValueInScope(
                 System.currentTimeMillis(),
                 TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getStartTime()).getTime(),
-                TimeUtilities.instance().parse("yyyy-MM-dd", taskJob.getTaskGroup().getEndTime()).getTime());
+                TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getEndTime()).getTime());
         if (!valid) {
             try {
                 TaskGroupManager.getInstance().delete(taskJob);
@@ -120,7 +118,7 @@ public class TaskGroupManager {
         Long currentMillis = System.currentTimeMillis();
         Long startMillis = TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getStartTime()).getTime();
         long afterMillis = afterTime.getTime();
-        Long endMillis = TimeUtilities.instance().parse("yyyy-MM-dd", taskJob.getTaskGroup().getEndTime()).getTime();
+        Long endMillis = TimeUtilities.instance().parse("yyyy-MM-dd HH:mm:ss", taskJob.getTaskGroup().getEndTime()).getTime();
         if (endMillis <= afterMillis) {
             return null;
         }
@@ -194,12 +192,12 @@ public class TaskGroupManager {
                 }
                 time = DateUtils.toDate(sTime);
                 break;
-            case QUARTER:
+            /*case QUARTER:
                 while(!sTime.isAfter(cTime) && (sTime.getYear() < YEAR_TO_GIVEUP_SCHEDULING_AT)) {
                     sTime = sTime.plusMonths(repeatInterval * 3);
                 }
                 time = DateUtils.toDate(sTime);
-                break;
+                break;*/
             case YEAR:
                 while(!sTime.isAfter(cTime) && (sTime.getYear() < YEAR_TO_GIVEUP_SCHEDULING_AT)) {
                     sTime = sTime.plusYears(repeatInterval);
@@ -233,9 +231,6 @@ public class TaskGroupManager {
             case MONTH:
                 schedTimeString = convMonthSchedTime(taskJob);
                 break;
-            case QUARTER:
-                schedTimeString = convQuarterSchedTime(taskJob);
-                break;
             case YEAR:
                 schedTimeString = convYearSchedTime(taskJob);
                 break;
@@ -246,40 +241,34 @@ public class TaskGroupManager {
 
     private String convMinuteSchedTime(TaskJob taskJob) {
         String schedTimeString = "";
-        String exeMinutes = "";
-        String tag = "";
         int interval = taskJob.getTaskGroup().getInterval();
         int second = taskJob.getCalendarValue(Calendar.SECOND);
-        int minute = taskJob.getCalendarValue(Calendar.MINUTE);
-        for (int i = 0; i < 4; i++) {
-            int exeMinute = 15 * i + (minute % 15);
-            exeMinutes = exeMinutes + tag + exeMinute;
-            tag = ",";
-        }
 
-        schedTimeString = second + 1 + " " + exeMinutes + " " + "* * * ?";
+        schedTimeString = second + 1 + " */"+ interval + " * * * ?";
         return schedTimeString;
     }
 
     private String convHourSchedTime(TaskJob taskJob) {
         String schedTimeString = "";
-        int second = routineTask.getCalendarValue(Calendar.SECOND);
-        int minute = routineTask.getCalendarValue(Calendar.MINUTE);
-        if (routineTask.getEndTime() != 0 && routineTask.getBeginTime() != 0) {
-            schedTimeString = second + 1 + " " + minute + " " + "* * * ?";
+        int minute = taskJob.getCalendarValue(Calendar.MINUTE);
+        int second = taskJob.getCalendarValue(Calendar.SECOND);
+        int interval = taskJob.getTaskGroup().getInterval();
+        if (taskJob.getTaskGroup().getStartTime() != null) {
+            schedTimeString = second + 1 + " " + minute + " " + "*/" + interval + " * * ?";
         }
         return schedTimeString;
     }
 
     private String convDaySchedTime(TaskJob taskJob) {
         String schedTimeString = "";
-        int second = routineTask.getCalendarValue(Calendar.SECOND);
-        int minute = routineTask.getCalendarValue(Calendar.MINUTE);
-        int hour = routineTask.getCalendarValue(Calendar.HOUR);
-        if (routineTask.getEndTime() != 0 && routineTask.getBeginTime() != 0) {
+        int second = taskJob.getCalendarValue(Calendar.SECOND);
+        int minute = taskJob.getCalendarValue(Calendar.MINUTE);
+        int hour = taskJob.getCalendarValue(Calendar.HOUR);
+        int interval = taskJob.getTaskGroup().getInterval();
+        if (taskJob.getTaskGroup().getStartTime() != null) {
 
             schedTimeString = second + 1 + " " + minute + " " + hour + " "
-                    + "* * ?";
+                    + "*/"+ interval +" * ?";
         }
         return schedTimeString;
     }
@@ -287,15 +276,10 @@ public class TaskGroupManager {
     private String convWeekSchedTime(TaskJob taskJob) {
         String schedTimeString = "";
 
-        if (routineTask.getEndTime() != 0 && routineTask.getBeginTime() != 0) {
-
-            Date et = new Date();
-            et.setTime(routineTask.getEndTime());
-
-            SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-
+        if (taskJob.getTaskGroup().getStartTime() != null) {
+            int interval = taskJob.getTaskGroup().getInterval();
             String weekStr = "";
-            int dayOfWeek = routineTask.getCalendarValue(Calendar.DAY_OF_WEEK);
+            int dayOfWeek = taskJob.getCalendarValue(Calendar.DAY_OF_WEEK);
             switch (dayOfWeek) {
                 case 1:
                     weekStr = "SUN";
@@ -320,13 +304,12 @@ public class TaskGroupManager {
                     break;
             }
 
-            int second = routineTask.getCalendarValue(Calendar.SECOND);
-            int minute = routineTask.getCalendarValue(Calendar.MINUTE);
-            int hour = routineTask.getCalendarValue(Calendar.HOUR);
-            int year = routineTask.getCalendarValue(Calendar.YEAR);
+            int second = taskJob.getCalendarValue(Calendar.SECOND);
+            int minute = taskJob.getCalendarValue(Calendar.MINUTE);
+            int hour = taskJob.getCalendarValue(Calendar.HOUR);
 
             schedTimeString = second + 1 + " " + minute + " " + hour + " ? * "
-                    + weekStr + " " + year + "-" + formatYear.format(et);;
+                    + weekStr + "/" + interval + " *";
         }
         return schedTimeString;
     }
@@ -334,58 +317,15 @@ public class TaskGroupManager {
     private String convMonthSchedTime(TaskJob taskJob) {
         String schedTimeString = "";
 
-        if (routineTask.getEndTime() != 0 && routineTask.getBeginTime() != 0) {
+        if (taskJob.getTaskGroup().getStartTime() != null) {
 
-            int year = routineTask.getCalendarValue(Calendar.YEAR);
-            int date = routineTask.getCalendarValue(Calendar.DATE);
-            int hour = routineTask.getCalendarValue(Calendar.HOUR);
-            int minute = routineTask.getCalendarValue(Calendar.MINUTE);
-            int second = routineTask.getCalendarValue(Calendar.SECOND);
-
-            Date et = new Date();
-            et.setTime(routineTask.getEndTime());
-
-            SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-
+            int date = taskJob.getCalendarValue(Calendar.DATE);
+            int hour = taskJob.getCalendarValue(Calendar.HOUR);
+            int minute = taskJob.getCalendarValue(Calendar.MINUTE);
+            int second = taskJob.getCalendarValue(Calendar.SECOND);
+            int interval = taskJob.getTaskGroup().getInterval();
             schedTimeString = second + 1 + " " + minute + " " + hour + " "
-                    + date + " * ? " + year + "-" + formatYear.format(et);
-        }
-        return schedTimeString;
-    }
-
-    /**
-     *
-     * @param exeTime
-     *            1~3
-     * @param beginTime
-     * @param endTime
-     * @return
-     */
-    private String convQuarterSchedTime(TaskJob taskJob) {
-        String schedTimeString = "";
-
-        if (routineTask.getEndTime() != 0 && routineTask.getBeginTime() != 0) {
-            int year = routineTask.getCalendarValue(Calendar.YEAR);
-            int month = routineTask.getCalendarValue(Calendar.MONTH);
-            int date = routineTask.getCalendarValue(Calendar.DATE);
-            int hour = routineTask.getCalendarValue(Calendar.HOUR);
-            int minute = routineTask.getCalendarValue(Calendar.MINUTE);
-            int second = routineTask.getCalendarValue(Calendar.SECOND);
-
-            String exeMonths = "";
-            String tag = "";
-            for (int i = 0; i < 4; i++) {
-                int exeMonth = 3 * i + (month % 3);
-                exeMonths = exeMonths + tag + exeMonth;
-                tag = ",";
-            }
-
-            Date et = new Date();
-            et.setTime(routineTask.getEndTime());
-            SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-
-            schedTimeString = second + 1 + " " + minute + " " + hour + " "
-                    + date + " " + exeMonths + " ? " + year + "-" + formatYear.format(et);
+                    + date + "*/" + interval + " ? *";
         }
         return schedTimeString;
     }
@@ -393,29 +333,17 @@ public class TaskGroupManager {
     private String convYearSchedTime(TaskJob taskJob) {
         String schedTimeString = "";
 
-        int year = routineTask.getCalendarValue(Calendar.YEAR);
-        int month = routineTask.getCalendarValue(Calendar.MONTH);
-        int date = routineTask.getCalendarValue(Calendar.DATE);
-        int hour = routineTask.getCalendarValue(Calendar.HOUR);
-        int minute = routineTask.getCalendarValue(Calendar.MINUTE);
-        int second = routineTask.getCalendarValue(Calendar.SECOND);
+        int month = taskJob.getCalendarValue(Calendar.MONTH);
+        int date = taskJob.getCalendarValue(Calendar.DATE);
+        int hour = taskJob.getCalendarValue(Calendar.HOUR);
+        int minute = taskJob.getCalendarValue(Calendar.MINUTE);
+        int second = taskJob.getCalendarValue(Calendar.SECOND);
+        int interval = taskJob.getTaskGroup().getInterval();
 
-        if (routineTask.getEndTime() != 0 && routineTask.getBeginTime() != 0) {
-
-            Date et = new Date();
-            et.setTime(routineTask.getEndTime());
-
-            //SimpleDateFormat formatMonth = new SimpleDateFormat("MM");
-            SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-
-            //int eMonth = Integer.parseInt(formatMonth.format(et));
-            int eYear = Integer.parseInt(formatYear.format(et));
-			/*if (eMonth < month) {
-				eYear = eYear - 1;
-			}*/
+        if (taskJob.getTaskGroup().getStartTime() != null) {
 
             schedTimeString = second + 1 + " " + minute + " " + hour + " "
-                    + date + " " + month + " ? " + year + "-" + eYear;
+                    + date + " " + month + " ? " + "*/" + interval;
         }
         return schedTimeString;
     }

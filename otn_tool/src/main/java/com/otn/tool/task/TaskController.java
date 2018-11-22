@@ -8,6 +8,8 @@ import com.otn.tool.common.enums.TaskState;
 import com.otn.tool.common.mvc.MyController;
 import com.otn.tool.common.utils.I18N;
 import com.otn.tool.common.utils.TimeUtilities;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -15,18 +17,24 @@ import java.util.Date;
 import java.util.List;
 
 public class TaskController extends MyController {
+    private static Log log = LogFactory.getLog(TaskController.class);
     private TaskModel model = new TaskModel();
     private TaskView view = new TaskView();
     private static final String TIMESTAMP_FORMAT="yyyy-MM-dd HH:mm:ss";
-    private static final String DATE_FORMAT="yyyy-MM-dd";
-    private static final String TIME_FORMAT="HH:mm:ss";
 
     public TaskController() {
         super();
         getFrame().setJMenuBar(view.getMenuBar());
         this.setUpMVC(model, view);
         initData();
-        // TODO: 2018/11/20 将任务添加进任务调度器
+
+        model.getTakGroupTable().forEach(group-> {
+            try {
+                TaskGroupManager.getInstance().addTask(new TaskJob(group));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void initData(){
@@ -37,7 +45,7 @@ public class TaskController extends MyController {
                 groups.forEach(group->{
                     group.setProgress("");
                     group.setStartTime(getTimeString(group.getStartTime(), TIMESTAMP_FORMAT));
-                    group.setEndTime(getTimeString(group.getEndTime(), DATE_FORMAT));
+                    group.setEndTime(getTimeString(group.getEndTime(), TIMESTAMP_FORMAT));
                     group.setLastExecuteTime(getTimeString(group.getLastExecuteTime(), TIMESTAMP_FORMAT));
                     group.setState(TaskState.fromInt(Integer.valueOf(group.getState())).getValueString());
                     group.setUnit(Period.fromInt(Integer.valueOf(group.getState())).getValueString());
@@ -56,7 +64,18 @@ public class TaskController extends MyController {
                         if(group.getTasks() == null) {
                             group.setTasks(new ArrayList<>());
                         }
-                        group.getTasks().add(task);
+                        try {
+                            String clazz = task.getClassName();
+                            Class zz = Class.forName(clazz);
+                            Object ob = zz.newInstance();
+                            if(ob instanceof AbstractTask) {
+                                AbstractTask taskA = (AbstractTask)ob;
+                                taskA.setTask(task);
+                                group.getTasks().add(taskA);
+                            }
+                        } catch(Exception e) {
+                            log.error(e.getStackTrace());
+                        }
                     }
                 });
             });

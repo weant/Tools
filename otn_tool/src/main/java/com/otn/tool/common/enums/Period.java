@@ -8,7 +8,6 @@ public enum Period {
     DAY,
     WEEK,
     MONTH,
-    QUARTER,
     YEAR;
 
     public static Period fromInt(int value){
@@ -18,8 +17,7 @@ public enum Period {
             case 2: return DAY;
             case 3: return WEEK;
             case 4: return MONTH;
-            case 5: return QUARTER;
-            case 6: return YEAR;
+            case 5: return YEAR;
             default: return DAY;
         }
     }
@@ -31,8 +29,7 @@ public enum Period {
             case DAY: return 2;
             case WEEK: return 3;
             case MONTH: return 4;
-            case QUARTER: return 5;
-            case YEAR: return 6;
+            case YEAR: return 5;
             default: return -1;
         }
     }
@@ -44,7 +41,6 @@ public enum Period {
             case DAY: return I18N.getInstance().getString("tool.days");
             case WEEK: return I18N.getInstance().getString("tool.week");
             case MONTH: return I18N.getInstance().getString("tool.month");
-            case QUARTER: return I18N.getInstance().getString("tool.quarter");
             case YEAR: return I18N.getInstance().getString("tool.year");
             default: return "";
         }

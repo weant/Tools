@@ -11,6 +11,7 @@ public class Task {
     String name;
     long groupId;
     String params;
+    String className;
 
     public long getId() {
         return id;
@@ -42,5 +43,13 @@ public class Task {
 
     public void setParams(String params) {
         this.params = params;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }

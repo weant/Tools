@@ -29,8 +29,8 @@ public class TaskJob {
     }
 
     public void execute(){
-        for(Task task : taskGroup.getTasks()) {
-
+        for(TaskApi task : taskGroup.getTasks()) {
+            ThreadPool.instance().execute(task);
         }
     }
 

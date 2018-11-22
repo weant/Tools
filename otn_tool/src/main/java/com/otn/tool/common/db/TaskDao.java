@@ -42,7 +42,7 @@ public class TaskDao {
      */
     public List<Task> getAllTasks() {
         StringBuilder sql = new StringBuilder();
-        sql.append("select id, name, groupid as groupId, params from task");
+        sql.append("select id, name, groupid as groupId, params, classname as className from task");
 
         try {
             return new ArrayList<>(tool.queryBeanCollection(sql.toString(), Task.class,( Object[])null));

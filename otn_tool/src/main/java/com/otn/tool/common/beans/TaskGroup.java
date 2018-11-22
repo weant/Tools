@@ -6,6 +6,8 @@
  */
 package com.otn.tool.common.beans;
 
+import com.otn.tool.task.TaskApi;
+
 import java.util.List;
 
 public class TaskGroup {
@@ -18,7 +20,7 @@ public class TaskGroup {
     String endTime;
     String lastExecuteTime;
     String progress;
-    List<Task> tasks;
+    List<TaskApi> tasks;
 
     public long getId() {
         return id;
@@ -92,11 +94,11 @@ public class TaskGroup {
         this.progress = progress;
     }
 
-    public List<Task> getTasks() {
+    public List<TaskApi> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(List<TaskApi> tasks) {
         this.tasks = tasks;
     }
 }
