@@ -1,0 +1,123 @@
+OTNE =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+        (ADDRESS =
+          (PROTOCOL = TCP )
+          (HOST = otneVM1 )
+          (PORT = 4998 )
+        )
+    )
+    (CONNECT_DATA =
+      (SID = OTNE )
+    )
+  )
+
+ANALOG18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+ANALOG_ARCH18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+ETH18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+ETH_ARCH18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+MPLS18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+MPLS_ARCH18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+SDH18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+SDH_ARCH18_1_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+SNA_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+SNML_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+SYSTEM_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+  
+
+WDM_ALIAS  =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = otneVM1)(PORT = 4998))
+    (CONNECT_DATA =
+      (SERVICE_NAME = OTNE)
+    )
+  )
+
+
+

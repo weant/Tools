@@ -1,0 +1,1 @@
+package com.hcop.ptn.common.jcorba;import org.omg.CosNotification.StructuredEvent;public interface NotifHandler {	void handle(String nmsName, StructuredEvent[] events, boolean isNotif);	void synOver(AsConnector conn);}

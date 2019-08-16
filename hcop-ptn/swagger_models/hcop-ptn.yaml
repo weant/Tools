@@ -1,0 +1,556 @@
+swagger: '2.0'
+info:
+  description: HCOP-PTN RESTful 接口.
+  version: 1.0.1
+  title: HCOP-PTN RESTful 接口
+basePath: /hcop-ptn/api
+schemes:
+  - http
+tags:
+  - name: 告警
+  - name: 网元
+  - name: 端口
+  - name: 连接
+
+paths:
+  '/nes':
+    get:
+      tags:
+        - 网元
+      summary: 获取全网网元
+      description: 获取全网网元
+      produces:
+        - application/json
+      operationId: getAllNes
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NE'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/nes/neid/{neId}':
+    get:
+      tags:
+      - 网元
+      summary: 根据Id获取网元
+      description: 根据网元Id获取网元对象
+      produces:
+      - application/json
+      operationId: getNeById
+      parameters:
+      - name: neId
+        in: path
+        required: true
+        description: '网元Id'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            $ref: '#/definitions/NE'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/nes/nename/{neName}':
+    get:
+      tags:
+      - 网元
+      summary: 根据名称获取网元
+      description: 根据网元名称获取网元对象(模糊查询,大小写不敏感)
+      produces:
+      - application/json
+      operationId: getNeByName
+      parameters:
+      - name: neName
+        in: path
+        required: true
+        description: '网元名称'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NE'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/tps/neid/{neId}':
+    get:
+      tags:
+      - 端口
+      summary: 根据网元Id获取所有PTP
+      description: 根据网元Id获取网元的所有PTP(物理口)
+      produces:
+      - application/json
+      operationId: getPTPsByNeId
+      parameters:
+      - name: neId
+        in: path
+        required: true
+        description: '网元Id'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TP'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/tps/neid/{neId}/tpid/{tpId}':
+      get:
+        tags:
+        - 端口
+        summary: 根据网元Id和端口Id获取端口信息
+        description: 根据网元Id和端口Id获取端口信息
+        produces:
+        - application/json
+        operationId: getTpByNeIdAndTpId
+        parameters:
+        - name: neId
+          in: path
+          required: true
+          description: '网元Id'
+          type: string
+        - name: tpId
+          in: path
+          required: true
+          description: '端口Id'
+          type: string
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              $ref: '#/definitions/TP'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/connections/evc':
+    get:
+      tags:
+      - 连接
+      summary: 获取全网EVC连接
+      description: 获取全网EVC连接
+      produces:
+      - application/json
+      operationId: getAllEVCs
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Connection'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/connections/ces':
+    get:
+      tags:
+      - 连接
+      summary: 获取全网CES连接
+      description: 获取全网CES连接
+      produces:
+      - application/json
+      operationId: getAllCESs
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Connection'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/connections/pw':
+      get:
+        tags:
+        - 连接
+        summary: 获取全网PW连接
+        description: 获取全网PW连接
+        produces:
+        - application/json
+        operationId: getAllPWs
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Connection'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/connections/tunnel':
+      get:
+        tags:
+        - 连接
+        summary: 获取全网Tunnel连接
+        description: 获取全网Tunnel连接
+        produces:
+        - application/json
+        operationId: getAllTunnels
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Connection'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/connections/section':
+      get:
+        tags:
+        - 连接
+        summary: 获取全网Section连接
+        description: 获取全网Section连接
+        produces:
+        - application/json
+        operationId: getAllSections
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Connection'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/alarms/active':
+    get:
+      tags:
+        - 告警
+      summary: 获取全网活跃告警
+      description: 获取全网活跃告警
+      produces:
+        - application/json
+      operationId: getAllActiveAlarms
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Alarm'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/alarms/rootcause':
+    get:
+      tags:
+      - 告警
+      summary: 获取全网根因告警
+      description: 获取全网根因告警
+      produces:
+      - application/json
+      operationId: getAllRootcauseAlarms
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Alarm'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/alarms/rootcause/alarmid/{alarmId}/server/{server}':
+    get:
+      tags:
+      - 告警
+      summary: 获取指定告警的根因告警
+      description: 获取指定告警的根因告警
+      produces:
+      - application/json
+      operationId: getRCAlarmsByAlarmIdAndServer
+      parameters:
+      - name: alarmId
+        in: path
+        required: true
+        description: '告警id'
+        type: string
+      - name: server
+        in: path
+        required: true
+        description: '告警所属服务器'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Alarm'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/alarms/solution/pcid/{pcId}':
+    get:
+      tags:
+      - 告警
+      summary: 获取指定告警的解决方案
+      description: 获取指定告警的解决方案
+      produces:
+      - application/json
+      operationId: getSolutionByPcId
+      parameters:
+      - name: pcId
+        in: path
+        required: true
+        description: '告警的ProbableCause id'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              type: string
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+definitions:
+
+  Alarm:
+    type: object
+    description: '告警模型定义'
+    properties:
+      alarmId:
+        type: string
+        description: '告警Id'
+      occurrentTime:
+        type: string
+        description: '告警发生时间'
+      clearTime:
+        type: string
+        description: '告警清除时间'
+      probableCauseId:
+        type: string
+        description: '告警原因Id'
+      probableCause:
+        type: string
+        description: '中文告警原因'
+      alarmType:
+        type: string
+        description: '告警类型'
+      severity:
+        type: string
+        description: '告警级别'
+      friendlyName:
+        type: string
+        description: '告警源'
+      server:
+        type: string
+        description: '告警源自哪个服务器'
+      eventType:
+        type: string
+        description: '事件类型:alarmUpdate,alarmDeletion,alarmCreation'
+      isRootCause:
+        type: boolean
+        description: '告警是否是根因告警'
+    required:
+      - alarmId
+      - occurrentTime
+      - probableCauseId
+      - probableCause
+      - alarmType
+      - severity
+      - friendlyName
+      - server
+      - eventType
+
+  AlarmNotif:
+    type: object
+    description: '告警通知结构'
+    properties:
+      notifType:
+        type: string
+        description: '通知类型(对于告警来说总是NT_ALARM)'
+      data:
+        $ref: "#/definitions/Alarm"
+        description: '通知信息，即Alarm结构体'
+    required:
+      - notifType
+      - data
+
+  ErrorInfo:
+    type: object
+    description: '错误信息结构'
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+        example: 系统忙
+    required:
+      - code
+      - message
+
+  NECommunicationState:
+    description: '网元可达状态'
+    type: string
+    enum:
+      - reachable
+      - unreachable
+      - unknown
+
+  ConnectionType:
+    description: 连接类型
+    type: string
+    enum:
+    - EVC
+    - CES
+    - PW
+    - Tunnel
+    - Section
+
+  NE:
+    type: object
+    description: '网元模型定义'
+    properties:
+      neId:
+        type: string
+        description: '网元Id(数据库Id)'
+      neName:
+        type: string
+        description: '网元名称'
+      neIp:
+        type: string
+        description: '网元Ip'
+      neType:
+        type: string
+        description: '网元类型(1830PSS32,16,8,4)'
+      neVersion:
+        type: string
+        description: '网元版本'
+      communicationState:
+        $ref: "#/definitions/NECommunicationState"
+        description: '可达状态'
+      gNeIp:
+        type: string
+        description: '网关网元IP'
+    required:
+      - neId
+      - neName
+      - neIp
+      - neType
+      - neVersion
+      - communicationState
+      - gNeIp
+
+  TP:
+    type: object
+    description: '端口模型定义'
+    properties:
+      neId:
+        type: string
+        description: '所属网元Id'
+      neName:
+        type: string
+        description: '所属网元名称'
+      equipName:
+        type: string
+        description: '所属板卡名称'
+      tpId:
+        type: string
+        description: '端口ID'
+      tpName:
+        type: string
+        description: '端口名称'
+    required:
+      - neId
+      - equipType
+      - tpId
+      - tpName
+
+  Connection:
+    type: object
+    description: '连接模型定义'
+    properties:
+      connId:
+        type: string
+        description: '连接Id'
+      connType:
+        $ref: "#/definitions/ConnectionType"
+        description: '连接类型'
+      connName:
+        type: string
+        description: '连接名称'
+      tps:
+        type: array
+        items:
+          $ref: '#/definitions/TP'
+        description: '连接所包含的端口列表'
+    required:
+      - connId
+      - connType
+      - connName
+      - tps

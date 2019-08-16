@@ -1,0 +1,9 @@
+将libs目录下的本地jar install到本地仓储，否则assembly打包会出问题，即便可以同为修改distribution.xml，但打包时maven会遍历各个远程仓储，会很慢
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\almapidl.jar -DgroupId=com.nms.tool -DartifactId=almapidl -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\basicTools.jar -DgroupId=com.nms.tool -DartifactId=basicTools -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\naInterface.jar -DgroupId=com.nms.tool -DartifactId=naInterface -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\opticscsgIdl.jar -DgroupId=com.nms.tool -DartifactId=opticscsgIdl -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\ojdbc6.jar -DgroupId=oracle.jdbc -DartifactId=ojdbc -Dversion=6.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\oraclepki.jar -DgroupId=oracle.security.pki -DartifactId=oraclepki -Dversion=6.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\osdt_core.jar -DgroupId=oracle.security.crypto -DartifactId=osdt_core -Dversion=6.0 -Dpackaging=jar
+mvn install:install-file -Dfile=D:\Workspace\MavenTools\hcop-ptn\libs\osdt_cert.jar -DgroupId=oracle.security.crypto.cert -DartifactId=osdt_cert -Dversion=6.0 -Dpackaging=jar

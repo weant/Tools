@@ -1,0 +1,21 @@
+# hcop-ptn
+
+#### Description
+HCOP ptn项目
+
+#### 编译
+mvn clean package
+
+#### 运行
+java -jar target/hcop-ptn-distribution.jar.jar
+
+#### 运行参数
+java -jar target/hcop-ptn-contributor.jar -help
+
+#### SSE(Server Sent Events)地址：
+[http://<host:port>/hcop-ptn/notif](http://<host:port>/hcop-ptn/notif)
+
+#### API文档生成
+1. 下载 *swagger2markup-cli-1.3.3.jar*
+2. 安装 *asciidoctor*
+3. 按doc/genDoc.sh内容生成文档(html)

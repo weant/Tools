@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off">
+    <properties>
+        <property name="LOG_HOME">../trace</property>
+        <property name="FILE_NAME">hcop-ptn_log</property>
+        <property name="FILE_NAME_ERROR">hcop-ptn_error</property>
+        <property name="FILE_NAME_JETTY">jetty/log</property>
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m ([%t]%c{1}.%M:%L)%n</property>
+    </properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="info" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+        <RollingRandomAccessFile name="RollingFile"
+                                 fileName="${LOG_HOME}/${FILE_NAME}"
+                                 filePattern="${LOG_HOME}/${FILE_NAME}%i">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="RollingFileError"
+                                 fileName="${LOG_HOME}/${FILE_NAME_ERROR}"
+                                 filePattern="${LOG_HOME}/${FILE_NAME_ERROR}%i">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="RollingFile_jetty"
+                                 fileName="${LOG_HOME}/${FILE_NAME_JETTY}"
+                                 filePattern="${LOG_HOME}/${FILE_NAME_JETTY}%i">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+    </appenders>
+    <loggers>
+        <logger name="org.eclipse.jetty" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFile_jetty"/>
+        </logger>
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+</configuration>   

@@ -1,0 +1,39 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <!-- TODO: a jarjar format would be better -->
+    <id>distribution</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <excludes>
+                <exclude>conf/**</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpack>true</unpack>
+            <scope>runtime</scope>
+            <excludes>
+                <exclude>org.slf4j:slf4j-simple</exclude>
+                <exclude>log4j:log4j</exclude>
+                <exclude>io.swagger:swagger-codegen-cli</exclude>
+                <exclude>ch.qos.logback:logback-classic</exclude>
+            </excludes>
+        </dependencySet>
+        <!--dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+            <scope>system</scope>
+        </dependencySet-->
+    </dependencySets>
+</assembly>
+

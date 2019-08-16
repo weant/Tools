@@ -1,0 +1,543 @@
+swagger: '2.0'
+info:
+  description: HCOP-OTN RESTful 接口.
+  version: 1.0.1
+  title: HCOP-OTN RESTful 接口
+basePath: /hcop-otn/api
+schemes:
+  - http
+tags:
+  - name: 网元
+  - name: 板卡
+  - name: 端口
+  - name: 连接
+  - name: 光功率
+
+paths:
+  '/nes':
+    get:
+      tags:
+        - 网元
+      summary: 获取全网网元
+      description: 获取全网网元
+      produces:
+        - application/json
+      operationId: getAllNes
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NE'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/nes/neid/{neId}':
+    get:
+      tags:
+      - 网元
+      summary: 根据Id获取网元
+      description: 根据网元Id获取网元对象
+      produces:
+      - application/json
+      operationId: getNeById
+      parameters:
+      - name: neId
+        in: path
+        required: true
+        description: '网元Id'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            $ref: '#/definitions/NE'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/nes/nename/{neName}':
+    get:
+      tags:
+      - 网元
+      summary: 根据名称获取网元
+      description: 根据网元名称获取网元对象(模糊查询,大小写不敏感)
+      produces:
+      - application/json
+      operationId: getNeByName
+      parameters:
+      - name: neName
+        in: path
+        required: true
+        description: '网元名称'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NE'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/equipments/neid/{neId}':
+    get:
+      tags:
+      - 板卡
+      summary: 根据网元Id获取所有板卡
+      description: 根据网元Id获取网元的所有板卡
+      produces:
+      - application/json
+      operationId: getEquipmentsByNeId
+      parameters:
+      - name: neId
+        in: path
+        required: true
+        description: '网元Id'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Equipment'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/tps/neid/{neId}':
+    get:
+      tags:
+      - 端口
+      summary: 根据网元Id获取所有PTP
+      description: 根据网元Id获取网元的所有PTP(物理口)
+      produces:
+      - application/json
+      operationId: getPTPsByNeId
+      parameters:
+      - name: neId
+        in: path
+        required: true
+        description: '网元Id'
+        type: string
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TP'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/tps/neid/{neId}/tpid/{tpId}':
+      get:
+        tags:
+        - 端口
+        summary: 根据网元Id和端口Id获取端口信息
+        description: 根据网元Id和端口Id获取端口信息
+        produces:
+        - application/json
+        operationId: getTpByNeIdAndTpId
+        parameters:
+        - name: neId
+          in: path
+          required: true
+          description: '网元Id'
+          type: string
+        - name: tpId
+          in: path
+          required: true
+          description: '端口Id'
+          type: string
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              $ref: '#/definitions/TP'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/connections/ots':
+    get:
+      tags:
+      - 连接
+      summary: 获取全网OTS连接
+      description: 获取全网OTS连接
+      produces:
+      - application/json
+      operationId: getAllOTSs
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Connection'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/connections/och':
+    get:
+      tags:
+      - 连接
+      summary: 获取全网OCH连接
+      description: 获取全网OCH连接
+      produces:
+      - application/json
+      operationId: getAllOCHs
+      responses:
+        '200':
+          description: 成功返回
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Connection'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+  '/connections/dsr':
+      get:
+        tags:
+        - 连接
+        summary: 获取全网业务连接
+        description: 获取全网业务连接
+        produces:
+        - application/json
+        operationId: getAllDSRs
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Connection'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/connections/dsr/ochid/{ochId}':
+      get:
+        tags:
+        - 连接
+        summary: 根据OCH连接Id获取承载的业务
+        description: 根据OCH连接Id获取承载的业务
+        produces:
+        - application/json
+        operationId: getDsrByOchId
+        parameters:
+          - name: ochId
+            in: path
+            required: true
+            description: 'OCH连接Id'
+            type: string
+        responses:
+          '200':
+            description: 成功返回
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Connection'
+          '404':
+            description: 访问失败
+          '500':
+            description: 内部错误
+            schema:
+              $ref: '#/definitions/ErrorInfo'
+
+  '/op/tps':
+    post:
+      tags:
+      - 光功率
+      summary: 批量获取端口光功率
+      description: '批量获取端口光功率。使用该方式可以一次性获取多个网元的多个端口光功率'
+      produces:
+      - application/json
+      operationId: getTpOps
+      parameters:
+      - name: neTps
+        in: body
+        required: true
+        description: 端口列表
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/NeTp'
+      responses:
+        '200':
+          description: 成功返回端口光功率列表
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TpOp'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+  '/op/connections':
+    post:
+      tags:
+      - 光功率
+      summary: 批量获取连接光功率
+      description: '批量获取连接光功率，包括承载该连接的所有OTS端口的光功率'
+      produces:
+      - application/json
+      operationId: getConnOps
+      parameters:
+      - name: connIds
+        in: body
+        required: true
+        description: 连接Id列表
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: 成功返回连接光功率列表
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ConnOp'
+        '404':
+          description: 访问失败
+        '500':
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/ErrorInfo'
+
+definitions:
+  NECommunicationState:
+    description: '网元可达状态'
+    type: string
+    enum:
+      - reachable
+      - unreachable
+      - unknown
+
+  ConnectionType:
+    description: 连接类型
+    type: string
+    enum:
+    - OTS
+    - OMS
+    - OCH
+    - PATH
+    - TRAIL
+
+  NE:
+    type: object
+    description: '网元模型定义'
+    properties:
+      neId:
+        type: string
+        description: '网元Id(数据库Id)'
+      neName:
+        type: string
+        description: '网元名称'
+      neIp:
+        type: string
+        description: '网元Ip'
+      neType:
+        type: string
+        description: '网元类型(1830PSS32,16,8,4)'
+      neVersion:
+        type: string
+        description: '网元版本'
+      communicationState:
+        $ref: "#/definitions/NECommunicationState"
+        description: '可达状态'
+    required:
+      - neId
+      - neName
+      - neIp
+      - neType
+      - neVersion
+      - communicationState
+
+  Equipment:
+    type: object
+    description: '设备板卡模型定义'
+    properties:
+      neId:
+        type: string
+        description: '所属网元Id'
+      neName:
+        type: string
+        description: '所属网元名称'
+      equipName:
+        type: string
+        description: '板卡名称'
+      slot:
+        type: string
+        description: '槽位地址'
+      sn:
+        type: string
+        description: '序列号'
+      mDate:
+        type: string
+        description: '出厂日期'
+    required:
+    - neId
+    - equipName
+    - slot
+    - sn
+
+  TP:
+    type: object
+    description: '端口模型定义'
+    properties:
+      neId:
+        type: string
+        description: '所属网元Id'
+      neName:
+        type: string
+        description: '所属网元名称'
+      equipName:
+        type: string
+        description: '所属板卡名称'
+      tpId:
+        type: string
+        description: '端口ID'
+      tpName:
+        type: string
+        description: '端口名称'
+    required:
+      - neId
+      - equipType
+      - tpId
+      - tpName
+
+  Connection:
+    type: object
+    description: '连接模型定义'
+    properties:
+      connId:
+        type: string
+        description: '连接Id'
+      connType:
+        $ref: "#/definitions/ConnectionType"
+        description: '连接类型'
+      connName:
+        type: string
+        description: '连接名称'
+      tps:
+        type: array
+        items:
+          $ref: '#/definitions/TP'
+        description: '连接所包含的端口列表'
+    required:
+      - connId
+      - connType
+      - connName
+      - tps
+
+  NeTp:
+    type: object
+    description: '网元端口列表结构'
+    properties:
+      neId:
+        type: string
+        description: '网元Id'
+      tpIds:
+        type: array
+        items:
+          type: string
+        description: '网元内端口ID列表'
+    required:
+      - neId
+      - tpIds
+
+  TpOp:
+    type: object
+    description: '端口光功率结构'
+    properties:
+      neId:
+        type: string
+        description: '所属网元Id'
+      neName:
+        type: string
+        description: '所属网元名称'
+      tpId:
+        type: string
+        description: '端口Id'
+      tpName:
+        type: string
+        description: '端口名称'
+      opr:
+        type: string
+        description: '接收光功率'
+      opt:
+        type: string
+        description: '发送光功率'
+    required:
+      - neId
+      - tpId
+
+  ConnOp:
+    type: object
+    description: '连接光功率结构'
+    properties:
+      connId:
+        type: string
+        description: '连接Id'
+      tpOps:
+        type: array
+        items:
+          $ref: '#/definitions/TpOp'
+        description: '端口光功率列表'
+    required:
+      - connId
+      - tpOps
+
+  ErrorInfo:
+    type: object
+    description: '错误信息结构'
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+        example: 系统忙
+    required:
+      - code
+      - message
+          

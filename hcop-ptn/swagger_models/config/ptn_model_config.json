@@ -1,0 +1,7 @@
+{
+  "groupId":"com.hcop.ptn",
+  "artifactId":"restful-api-lib-hcop-ptn-client",
+  "artifactVersion":"1.1.0",
+  "library":"jersey2",
+  "modelPackage": "com.hcop.ptn.restful.model"
+}
