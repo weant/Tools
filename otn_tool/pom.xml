@@ -24,7 +24,7 @@
     <maven-install-plugin-version>2.5.2</maven-install-plugin-version>
     <maven-deploy-plugin-version>2.8.2</maven-deploy-plugin-version>
     <junit.version>4.12</junit.version>
-    <quartz.version>2.3.0</quartz.version>
+    <quartz.version>2.3.2</quartz.version>
     <jacorb.version>3.9</jacorb.version>
     <jetty.version>9.4.11.v20180605</jetty.version>
     <slf4j.version>1.7.25</slf4j.version>
