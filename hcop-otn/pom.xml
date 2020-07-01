@@ -11,7 +11,7 @@
 
     <properties>
         <jdkCompileVersion>1.8</jdkCompileVersion>
-        <log4j-version>2.11.0</log4j-version>
+        <log4j-version>2.13.3</log4j-version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jcommander-version>1.64</jcommander-version>
