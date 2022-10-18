@@ -19,7 +19,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<swagger-core.version>1.5.20</swagger-core.version>
-		<jackson.version>2.9.6</jackson.version>
+		<jackson.version>2.13.4.1</jackson.version>
 		<jersey.version>2.27</jersey.version>
 		<javax.servlet.api.version>3.1.0</javax.servlet.api.version>
 		<swagger-annotations.version>1.5.20</swagger-annotations.version>
